@@ -1,0 +1,7 @@
+{
+  "name": "munch-time-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
