@@ -1,31 +1,9 @@
-<!-- <ion-menu contentId="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu Content</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="ion-padding">This is the menu content.</ion-content>
-</ion-menu>
-
-<div class="ion-page" id="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="ion-padding"> Tap the button in the toolbar to open the menu. </ion-content>
-</div> -->
-
 <ion-app>
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>Inbox</ion-list-header>
-          <ion-note>hi&#64;ionicframework.com</ion-note>
+          <ion-list-header>Munch Time</ion-list-header>
 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
@@ -41,80 +19,3 @@
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>
-
-
-<!-- <ion-app>
-  <ion-menu side="start" menuId="mainMenu" contentId="main" swipeGesture="false">
-
-    <ion-header>
-      <ion-toolbar color="app-dark">
-        <ion-buttons slot="start">
-          <ion-button disabled="true">
-            <ion-icon slot="icon-only"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-        <ion-title class="ion-text-center">Menu</ion-title>
-        <ion-buttons slot="end">
-          <ion-button id="menuButton">
-            <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content>
-
-      <img style="padding-left: 25%; padding-right: 25%;" defaultImage="./assets/images/logo.png" lazyLoad="./assets/images/logo.png" />
-
-      <div class="divider" style="margin: 0;"></div>
-
-      <ion-item detail [routerLink]="['/', 'home', 'notifications']" routerLinkActive="active-link">
-        <ion-icon slot="start" name="notifications-outline"></ion-icon>
-        <ion-label>Notifications</ion-label>
-      </ion-item>
-
-      <ion-item detail [routerLink]="['/', 'home', 'dashboard']" routerLinkActive="active-link">
-        <ion-icon slot="start" name="bar-chart-outline"></ion-icon>
-        <ion-label>Dashboard</ion-label>
-      </ion-item>
-
-      <ion-item detail [routerLink]="['/', 'home', 'planner']" routerLinkActive="active-link">
-        <ion-icon slot="start" name="calendar-outline"></ion-icon>
-        <ion-label>Planner & Reports</ion-label>
-      </ion-item>
-
-      <ion-item detail [routerLink]="['/', 'home', 'hr']" routerLinkActive="active-link">
-        <ion-icon slot="start" name="file-tray-full-outline"></ion-icon>
-        <ion-label>HR Management</ion-label>
-      </ion-item>
-
-      <ion-item detail [routerLink]="['/', 'home', 'cer']" routerLinkActive="active-link">
-        <ion-icon slot="start" name="card-outline"></ion-icon>
-        <ion-label>Payment & Expenses</ion-label>
-      </ion-item>
-
-      <ion-item detail [routerLink]="['/', 'home', 'settings']" routerLinkActive="active-link">
-        <ion-icon slot="start" name="cog-outline"></ion-icon>
-        <ion-label>Settings</ion-label>
-      </ion-item>
-
-      <ion-item detail [routerLink]="['/', 'home', 'about']" routerLinkActive="active-link">
-        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
-        <ion-label>About</ion-label>
-      </ion-item>
-
-      <ion-button class="ion-margin" color="danger" expand="block">
-        <ion-label>Logout</ion-label>
-        <ion-icon slot="end" name="log-out-outline"></ion-icon>
-      </ion-button>
-
-    </ion-content>
-
-  </ion-menu>
-  <ion-router-outlet id="main"></ion-router-outlet>
-</ion-app> -->
-
-
-<!-- <ion-app>
-  <ion-router-outlet></ion-router-outlet>
-</ion-app> -->
