@@ -4,13 +4,47 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'pages',
     pathMatch: 'full'
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  }
+    path: 'auth',
+    children: [
+      {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full'
+      },
+      {
+        path: 'login',
+        loadChildren: () => import('./auth/login/login.module').then(m => m.LoginPageModule)
+      },
+      {
+        path: 'register',
+        loadChildren: () => import('./auth/register/register.module').then(m => m.RegisterPageModule)
+      },
+      {
+        path: 'forgot',
+        loadChildren: () => import('./auth/forgot/forgot.module').then(m => m.ForgotPageModule)
+      },
+    ]
+  },
+  {
+    path: 'pages',
+    loadChildren: () => import('./pages/pages.module').then(m => m.PagesPageModule),
+  },
+  {
+    path: 'maintenance',
+    loadChildren: () => import('./error/maintenance/maintenance.module').then(m => m.MaintenancePageModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'error/not-found'
+  },
+  {
+    path: 'error/not-found',
+    loadChildren: () => import('./error/not-found/not-found.module').then(m => m.NotFoundPageModule)
+  },
 ];
 
 @NgModule({
@@ -19,4 +53,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
