@@ -24,3 +24,119 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+#container {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+ion-card-content {
+  color: var(--ion-color-dark);
+}
+
+.card-danger {
+  --background: var(--ion-color-danger);
+  color: var(--ion-color-light);
+  ion-card-title {
+    --color: var(--ion-color-light);
+  }
+  ion-card-content {
+    text-align: center;
+  }
+}
+
+.card-warning {
+  --background: var(--ion-color-warning);
+  color: var(--ion-color-light);
+  ion-card-content {
+    text-align: center;
+  }
+}
+
+.divider {
+  margin: 15px 0px;
+  border-bottom: 1px solid var(--ion-color-dark);
+}
+
+.item-single {
+  margin: 10px;
+  --border-radius: 10px;
+  --border-style: none;
+}
+
+.item-start {
+  margin: 10px 10px 0 10px;
+  --border-radius: 10px 10px 0 0;
+}
+
+.item-middle {
+  margin: 0 10px;
+}
+
+.item-end {
+  margin: 0 10px 10px 10px;
+  --border-radius: 0 0 10px 10px;
+  --border-style: none;
+}
+
+ion-tab-button {
+  color: var(--ion-color-primary);
+}
+
+ion-tabs {
+  background-color: var(--ion-color-light);
+}
+
+.tab-selected {
+  border-radius: 10px;
+  margin: 0px 10px;
+  background: rgb(0, 150, 0) !important;
+  color: white;
+}
+
+.ion-invalid.ion-touched ion-label {
+  color: var(--ion-color-danger);
+}
+
+.error-text {
+  font-size: small;
+}
+
+p.error-text {
+  margin: 5px;
+  font-weight: bold;
+}
+
+ul.error-text {
+  margin: 5px;
+  padding-left: 15px;
+}
+
+.required {
+  color: red;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: black;
+}
+
+ion-tabs {
+  background-color: var(--ion-color-light);
+}
+
+ion-header {
+  ion-title {
+    text-align: center;
+  }
+}
