@@ -4,7 +4,7 @@ export class User {
     public name: string,
     public email: string,
     public status: boolean,
-    public roles: string,
+    public roles: "admin" | "canteen-worker" | "parent",
     public token: string,
   ) { }
 }

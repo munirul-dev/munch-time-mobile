@@ -129,8 +129,24 @@ ion-icon {
 ion-card {
   margin: 16px;
 
+  ion-card-header {
+    padding: 16px;
+  }
+
   ion-card-content {
     text-align: center;
+  }
+}
+
+// MASTRER OVERWRITE 6 - Toolbar
+ion-toolbar {
+  --background: var(--ion-color-light) !important;
+  --color: var(--ion-color-dark) !important;
+}
+
+ion-footer {
+  ion-toolbar {
+    --border-color: var(--ion-color-light);
   }
 }
 
@@ -142,6 +158,10 @@ ion-card {
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.divider {
+  border-bottom: 1px solid var(--ion-color-primary);
 }
 
 // CUSTOM STYLING 2 - Error Handler

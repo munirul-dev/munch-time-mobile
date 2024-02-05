@@ -47,7 +47,6 @@ export class LoginPage implements OnInit {
           loadingElement.dismiss();
           this.navController.navigateForward(['/pages']);
         }, error: (error) => {
-          console.log(error);
           loadingElement.dismiss();
           this.showErrorAlert(error, form);
         }

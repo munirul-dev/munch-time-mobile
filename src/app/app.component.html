@@ -2,8 +2,20 @@
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
+
+        <ion-header [translucent]="true">
+          <ion-toolbar>
+            <ion-buttons slot="end">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title>Menu</ion-title>
+          </ion-toolbar>
+        </ion-header>
+
         <ion-list id="inbox-list">
+          <br>
           <ion-list-header>Munch Time</ion-list-header>
+          <br>
 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
@@ -12,7 +24,7 @@
             </ion-item>
           </ion-menu-toggle>
 
-          <ion-item routerDirection="root" lines="full" detail="false" routerLinkActive="selected">
+          <ion-item routerDirection="root" lines="full" detail="false" (click)="onLogout()">
             <ion-icon aria-hidden="true" slot="start" ios="log-out-outline" md="log-out-sharp"></ion-icon>
             <ion-label>Logout</ion-label>
           </ion-item>

@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, catchError, filter, from, map, switchMap, 
 import { User } from '../model/user.model';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage-angular';
-import { AlertController, NavController, Platform } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { ConnectionService } from './connection.service';
 
 @Injectable({
@@ -16,7 +16,6 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private storage: Storage,
-    private platform: Platform,
     private navController: NavController,
     private alertController: AlertController,
     private connections: ConnectionService,
