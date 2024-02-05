@@ -25,6 +25,7 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
+// MASTER OVERWRITE 1 - Background
 #container {
   text-align: center;
   position: absolute;
@@ -34,68 +35,118 @@
   transform: translateY(-50%);
 }
 
-ion-card-content {
-  color: var(--ion-color-dark);
+.container {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.card-danger {
-  --background: var(--ion-color-danger);
-  color: var(--ion-color-light);
-  ion-card-title {
-    --color: var(--ion-color-light);
-  }
-  ion-card-content {
-    text-align: center;
-  }
-}
-
-.card-warning {
-  --background: var(--ion-color-warning);
-  color: var(--ion-color-light);
-  ion-card-content {
-    text-align: center;
-  }
-}
-
-.divider {
-  margin: 15px 0px;
-  border-bottom: 1px solid var(--ion-color-dark);
-}
-
-.item-single {
-  margin: 10px;
-  --border-radius: 10px;
-  --border-style: none;
-}
-
-.item-start {
-  margin: 10px 10px 0 10px;
-  --border-radius: 10px 10px 0 0;
-}
-
-.item-middle {
-  margin: 0 10px;
-}
-
-.item-end {
-  margin: 0 10px 10px 10px;
-  --border-radius: 0 0 10px 10px;
-  --border-style: none;
-}
-
-ion-tab-button {
-  color: var(--ion-color-primary);
+ion-content {
+  --background: var(--ion-color-light);
 }
 
 ion-tabs {
   background-color: var(--ion-color-light);
+
+  ion-tab-button {
+    --color: #8383ae;
+    --background-focused: white;
+    --color-selected: white;
+  }
 }
 
-.tab-selected {
+ion-tab-bar {
+  --background: #0e0b2d;
+}
+
+// MASTER OVERWRITE 2 - List & Item
+ion-list {
+  padding: 0px !important;
+}
+
+ion-item {
+  .label-title {
+    font-weight: bold;
+    display: block;
+    white-space: pre-wrap;
+  }
+
+  .label-subtitle {
+    font-weight: normal;
+    font-size: small;
+    display: block;
+    white-space: pre-wrap;
+  }
+
+  .label {
+    font-weight: normal;
+    font-size: small;
+    display: block;
+    white-space: pre-wrap;
+  }
+}
+
+.item-single {
   border-radius: 10px;
-  margin: 0px 10px;
-  background: rgb(0, 150, 0) !important;
-  color: white;
+  --border-style: none;
+}
+
+.item-start {
+  border-radius: 10px 10px 0 0;
+}
+
+// .item-middle {
+//   margin: 0 10px;
+// }
+
+.item-end {
+  border-radius: 0 0 10px 10px;
+  --border-style: none;
+}
+
+// MASTER OVERWRITE 3 - Grid & Column
+ion-grid {
+  padding: 0px;
+}
+
+ion-col {
+  padding: 0px;
+}
+
+// MASTER OVERWRITE 4 - Icon
+ion-icon {
+  cursor: pointer;
+}
+
+.item-icon-end {
+  padding-top: 25.81px;
+}
+
+// MASTER OVERWRITE 5 - Card
+ion-card {
+  margin: 16px;
+
+  ion-card-content {
+    text-align: center;
+  }
+}
+
+// CUSTOM STYLING 1 - Container
+.container {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+// CUSTOM STYLING 2 - Error Handler
+.required {
+  color: red;
 }
 
 .ion-invalid.ion-touched ion-label {
@@ -104,26 +155,23 @@ ion-tabs {
 
 .error-text {
   font-size: small;
-}
-
-p.error-text {
-  margin: 5px;
   font-weight: bold;
+  color: var(--ion-color-danger);
 }
 
-ul.error-text {
-  margin: 5px;
-  padding-left: 15px;
+// STYLING FIX 1 - Title Alignment
+ion-header {
+  ion-title {
+    text-align: center;
+  }
 }
 
-.required {
-  color: red;
-}
-
+// STYLING FIX 2 - Hide file input type
 input[type="file"] {
   display: none;
 }
 
+//STYLING FIX 3 - Text autofill color
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -131,12 +179,28 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: black;
 }
 
-ion-tabs {
-  background-color: var(--ion-color-light);
+//STYLING FIX 4 - Card Text Color
+ion-card {
+  --color: var(--ion-color-dark);
 }
 
-ion-header {
-  ion-title {
-    text-align: center;
+// Form
+.form-label {
+  padding-left: 5px;
+  ion-label {
+    font-weight: bold;
+    white-space: normal !important;
   }
+}
+
+.form-input {
+  margin-top: 5px;
+  margin-bottom: 20px;
+  ion-icon {
+    margin-right: 10px;
+  }
+}
+
+.form-input-hidden {
+  display: none !important;
 }
