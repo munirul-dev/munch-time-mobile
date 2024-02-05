@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  appName: 'MunchTime',
+  yearReleased: 2024,
+  server: 'https://munch-time-web.test',
+  api: '/api/',
 };
 
 /*
