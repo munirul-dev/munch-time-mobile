@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content class="gradient">
 
   <ion-grid>
     <ion-row>
@@ -33,11 +33,11 @@
             </ion-text>
           </ion-item>
 
-          <ion-button type="submit" mode="ios" expand="block" class="ion-margin-top">Login</ion-button>
+          <ion-button type="submit" mode="ios" expand="block" class="ion-margin-top" color="pink">Sign In</ion-button>
 
           <ion-row class="register-row ion-justify-content-between">
-            <ion-text (click)="openRegisterPage()" color="primary">Sign Up</ion-text>
-            <ion-text (click)="openResetPage()" color="primary">Forgot Password</ion-text>
+            <ion-text (click)="openRegisterPage()">Sign Up</ion-text>
+            <ion-text (click)="openResetPage()">Forgot Password</ion-text>
           </ion-row>
 
         </form>

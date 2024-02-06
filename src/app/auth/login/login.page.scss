@@ -30,3 +30,9 @@
     text-align: right;
   }
 }
+
+.gradient {
+  --background: linear-gradient(180deg, #F771FB 0%, #FC98E2 50%, #FFF9FC 100%);
+  height: 100%;
+  width: 100%;
+}

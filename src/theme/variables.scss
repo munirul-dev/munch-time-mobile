@@ -74,6 +74,23 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  // Pink
+  --ion-color-pink: #f771fb;
+  --ion-color-pink-rgb: 247, 113, 251;
+  --ion-color-pink-contrast: #000000;
+  --ion-color-pink-contrast-rgb: 0, 0, 0;
+  --ion-color-pink-shade: #d963dd;
+  --ion-color-pink-tint: #f87ffb;
+
+  .ion-color-pink {
+    --ion-color-base: var(--ion-color-pink);
+    --ion-color-base-rgb: var(--ion-color-pink-rgb);
+    --ion-color-contrast: var(--ion-color-pink-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-pink-contrast-rgb);
+    --ion-color-shade: var(--ion-color-pink-shade);
+    --ion-color-tint: var(--ion-color-pink-tint);
+  }
 }
 
 @media (prefers-color-scheme: light) {

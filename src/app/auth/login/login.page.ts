@@ -36,7 +36,7 @@ export class LoginPage implements OnInit {
   authenticate(form: NgForm) {
     this.loadingController.create({
       keyboardClose: true,
-      message: 'Sila Tunggu...',
+      message: 'Signing In...',
     }).then(loadingElement => {
       loadingElement.present();
       this.authService.login({
