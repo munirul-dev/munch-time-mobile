@@ -89,10 +89,10 @@
 
       <ion-item-options>
         <ion-item-option [routerLink]="item.id.toString()">
-          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+          <ion-icon slot="icon-only" name="create-outline" [ngStyle]="{ 'margin-top' : seperateGroup(item) ? '28px' : '0px' }"></ion-icon>
         </ion-item-option>
-        <ion-item-option color="danger">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        <ion-item-option color="danger" (click)="onDeleteItem(item)">
+          <ion-icon slot="icon-only" name="trash" [ngStyle]="{ 'margin-top' : seperateGroup(item) ? '28px' : '0px' }"></ion-icon>
         </ion-item-option>
       </ion-item-options>
 

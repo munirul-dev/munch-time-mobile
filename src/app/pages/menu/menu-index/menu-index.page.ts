@@ -56,6 +56,33 @@ export class MenuIndexPage implements OnInit, OnDestroy {
   }
 
   onDeleteItem(menu: Menu) {
+    this.alertController.create({
+      header: 'Delete Menu',
+      message: 'Are you sure you want to delete this menu?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Confirm',
+          handler: () => {
+            this.menuService.delete({
+              id: menu.id,
+            }).subscribe({
+              next: (response: any) => {
+                this.showToast('Menu deleted successfully!', 2000, 'checkmark');
+                this.ionViewWillEnter();
+              }, error: (error: any) => {
+                this.showToast('An error occurred, please try again later!', 2000, 'warning');
+              }
+            });
+          }
+        }
+      ]
+    }).then(alertElement => {
+      alertElement.present();
+    });
   }
 
   deleteItem(menu: Menu) {

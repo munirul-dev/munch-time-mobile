@@ -1,13 +1,83 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="false">
   <ion-toolbar>
-    <ion-title>menu-create</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="pages/menus"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create Menu</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="true">
+        <ion-icon slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">menu-create</ion-title>
+      <ion-title size="large">Create Menu</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <br>
+
+  <form #form="ngForm" (ngSubmit)="submitForm(form)">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4" class="ion-padding-start ion-padding-end">
+          <ion-thumbnail>
+            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+          </ion-thumbnail>
+        </ion-col>
+
+        <ion-col size="8" class="ion-padding-end">
+
+          <ion-item class="item-single ion-margin-bottom">
+            <ion-select label="Category" interface="popover" placeholder="Please Select" name="category" [(ngModel)]="category">
+              <ion-select-option value="Rice">Rice</ion-select-option>
+              <ion-select-option value="Noodles">Noodles</ion-select-option>
+              <ion-select-option value="Sides">Sides</ion-select-option>
+              <ion-select-option value="Drinks">Drinks</ion-select-option>
+              <ion-select-option value="Diary">Diary</ion-select-option>
+              <ion-select-option value="Juice">Juice</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item class="item-single ion-margin-bottom">
+            <ion-input placeholder="Enter food name" name="name" [(ngModel)]="name" required></ion-input>
+          </ion-item>
+
+          <ion-item class="item-single ion-margin-bottom">
+            <ion-textarea placeholder="Enter food description here" name="description" [(ngModel)]="description" required></ion-textarea>
+          </ion-item>
+
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6">
+                <ion-item class="item-single ion-margin-bottom">
+                  <ion-input type="number" min="0.01" step="0.01" max="100" label="Price" placeholder="0.00" name="price" [(ngModel)]="price" required></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6" class="ion-padding-start">
+                <ion-item class="item-single ion-margin-bottom">
+                  <ion-input type="number" min="0" step="1" max="10000" label="Qty" placeholder="0" name="quantity" [(ngModel)]="quantity" required></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+          <ion-toggle color="success" name="status" [(ngModel)]="status">Status</ion-toggle>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button [disabled]="!form.valid" expand="block" (click)="submitForm(form)">Confirm</ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -33,14 +33,21 @@ export class MenuService {
 
   create(body: any) {
     return this.authService.auth.pipe(
-      switchMap((auth: User | null) => this.http.post(this.connections.api + this.connections.menu.create, body, this.connections.options(auth ? auth.token : ''))),
+      switchMap((auth: User | null) => this.http.post(this.connections.api + this.connections.menu.create, body, this.connections.formDataOptions(auth ? auth.token : ''))),
+      take(1),
+    );
+  }
+
+  edit(body: any) {
+    return this.authService.auth.pipe(
+      switchMap((auth: User | null) => this.http.post(this.connections.api + this.connections.menu.edit, body, this.connections.options(auth ? auth.token : ''))),
       take(1),
     );
   }
 
   update(body: any) {
     return this.authService.auth.pipe(
-      switchMap((auth: User | null) => this.http.post(this.connections.api + this.connections.menu.update, body, this.connections.options(auth ? auth.token : ''))),
+      switchMap((auth: User | null) => this.http.post(this.connections.api + this.connections.menu.update, body, this.connections.formDataOptions(auth ? auth.token : ''))),
       take(1),
     );
   }
