@@ -1,13 +1,73 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="false">
   <ion-toolbar>
-    <ion-title>user-create</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="pages/users"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create User</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="true">
+        <ion-icon slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">user-create</ion-title>
+      <ion-title size="large">Create User</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <br>
+
+  <form #form="ngForm" (ngSubmit)="submitForm(form)">
+    <ion-card>
+      <ion-card-header color="pink">
+        <ion-grid fixed>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="auto">
+              <ion-avatar class="ion-margin-end">
+                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+            </ion-col>
+            <ion-col>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+      <ion-card-content class="ion-text-start" style="padding: 16px;">
+
+        <ion-item class="item-single ion-margin-bottom" color="medium">
+          <ion-input type="text" placeholder="Enter name here" name="name" [(ngModel)]="name" required></ion-input>
+        </ion-item>
+
+        <ion-item class="item-single ion-margin-bottom" color="medium">
+          <ion-input type="email" placeholder="example@gmail.com" name="email" [(ngModel)]="email" required></ion-input>
+        </ion-item>
+
+        <ion-item class="item-single ion-margin-bottom" color="medium">
+          <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="password" required></ion-input>
+        </ion-item>
+
+        <ion-item class="item-single ion-margin-bottom" color="medium">
+          <ion-select label="Roles" interface="popover" placeholder="Please Select" name="role" [(ngModel)]="role">
+            <ion-select-option value="admin">Admin</ion-select-option>
+            <ion-select-option value="canteen-worker">Canteen Worker</ion-select-option>
+            <ion-select-option value="parent">Parent</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-toggle color="success" name="status" [(ngModel)]="status">Status</ion-toggle>
+      </ion-card-content>
+    </ion-card>
+  </form>
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button [disabled]="!form.valid" expand="block" (click)="submitForm(form)">Confirm</ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -55,7 +55,7 @@ export class MenuIndexPage implements OnInit, OnDestroy {
     }
   }
 
-  onDeleteItem(menu: Menu) {
+  deleteItem(item: Menu) {
     this.alertController.create({
       header: 'Delete Menu',
       message: 'Are you sure you want to delete this menu?',
@@ -68,7 +68,7 @@ export class MenuIndexPage implements OnInit, OnDestroy {
           text: 'Confirm',
           handler: () => {
             this.menuService.delete({
-              id: menu.id,
+              id: item.id,
             }).subscribe({
               next: (response: any) => {
                 this.showToast('Menu deleted successfully!', 2000, 'checkmark');
@@ -83,10 +83,6 @@ export class MenuIndexPage implements OnInit, OnDestroy {
     }).then(alertElement => {
       alertElement.present();
     });
-  }
-
-  deleteItem(menu: Menu) {
-
   }
 
   ngOnDestroy() {

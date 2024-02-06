@@ -1,9 +1,14 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="false">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Users Management</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="create">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,4 +18,42 @@
       <ion-title size="large">Users Management</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-list *ngIf="!isLoading">
+    <ion-card *ngFor="let item of loadedUser">
+      <ion-card-header color="pink">
+        <ion-grid fixed>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="auto">
+              <ion-avatar class="ion-margin-end">
+                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+            </ion-col>
+            <ion-col>
+              <ion-text style="font-size: larger; font-weight: bold;">{{ item.name }}</ion-text>
+            </ion-col>
+            <ion-col size="auto">
+              <ion-button style="display: inline; margin: 0px;" size="small" color="primary" [routerLink]="item.id.toString()">
+                <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+              </ion-button>
+              <ion-button style="display: inline; margin: 0px;" size="small" color="danger" (click)="deleteItem(item)">
+                <ion-icon slot="icon-only" name="trash"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+      <ion-card-content class="ion-text-start" style="padding: 16px;">
+        <ion-text>Email: {{ item.email }}</ion-text>
+        <br>
+        <ion-text>Role: {{ item.roles }}</ion-text>
+        <br>
+        <div style="display: flex;">
+          <ion-text>Status:&nbsp;</ion-text>
+          <ion-badge [color]="item.status ? 'success' : 'danger'">{{ item.status ? 'Active' : 'Inactive' }}</ion-badge>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
 </ion-content>
