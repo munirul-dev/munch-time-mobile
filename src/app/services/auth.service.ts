@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, filter, from, map, switchMap, take, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, catchError, filter, from, map, switchMap, take, tap } from 'rxjs';
 import { User } from '../model/user.model';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage-angular';
@@ -12,6 +12,8 @@ import { ConnectionService } from './connection.service';
 export class AuthService {
   private _user = new BehaviorSubject<User | null>(null);
   private _token: string = '';
+  private triggerGetMenu = new Subject<void>();
+  public onTriggerGetMenu = this.triggerGetMenu.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -188,8 +190,9 @@ export class AuthService {
     this.navController.navigateBack('/auth');
   }
 
-  private storeUserData(user: User) {
-    this.storage.set('user', user);
+  private async storeUserData(user: User) {
+    await this.storage.set('user', user);
     this._user.next(user);
+    this.triggerGetMenu.next();
   }
 }
