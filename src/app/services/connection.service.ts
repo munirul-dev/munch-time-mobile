@@ -33,6 +33,16 @@ export class ConnectionService {
     };
   }
 
+  get student() {
+    return {
+      index: 'student/index',
+      create: 'student/create',
+      edit: 'student/edit',
+      update: 'student/update',
+      destroy: 'student/destroy'
+    };
+  }
+
   get menu() {
     return {
       index: 'menu/index',

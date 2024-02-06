@@ -1,13 +1,64 @@
 <ion-header [translucent]="false">
   <ion-toolbar>
-    <ion-title>child-edit</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="pages/childs"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Child</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="true">
+        <ion-icon slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">child-edit</ion-title>
+      <ion-title size="large">Edit Child</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <br>
+
+  <form #form="ngForm" (ngSubmit)="submitForm(form)">
+    <ion-card>
+      <ion-card-header color="pink">
+        <ion-grid fixed>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="auto">
+              <ion-avatar class="ion-margin-end">
+                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+            </ion-col>
+            <ion-col>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+      <ion-card-content class="ion-text-start" style="padding: 16px;">
+
+        <ion-item class="item-single ion-margin-bottom" color="medium">
+          <ion-input type="text" placeholder="Enter name here" name="name" [(ngModel)]="name" required></ion-input>
+        </ion-item>
+
+        <ion-item class="item-single ion-margin-bottom" color="medium">
+          <ion-input type="text" placeholder="Class name" name="class_name" [(ngModel)]="class_name" required></ion-input>
+        </ion-item>
+
+        <ion-item class="item-single ion-margin-bottom" color="medium">
+          <ion-input type="text" placeholder="Year level" name="year_level" [(ngModel)]="year_level" required></ion-input>
+        </ion-item>
+
+      </ion-card-content>
+    </ion-card>
+  </form>
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button [disabled]="!form.valid" expand="block" (click)="submitForm(form)">Confirm</ion-button>
+  </ion-toolbar>
+</ion-footer>
