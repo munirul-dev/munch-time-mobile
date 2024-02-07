@@ -72,6 +72,13 @@ export class ReservationEditPage {
   }
 
   makePayment() {
+    const date = new Date();
+    const hour = date.getHours();
+    if (hour >= 0 && hour <= 1) {
+      this.showAlert('Bank Maintenance', 'Bank is currently undergoing maintenance, please try again later!');
+      return;
+    }
+
     this.alertController.create({
       header: 'Make Payment',
       message: 'Are you sure you want to make payment for this reservation?',

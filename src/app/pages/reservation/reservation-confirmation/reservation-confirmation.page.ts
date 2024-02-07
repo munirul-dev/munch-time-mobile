@@ -67,6 +67,13 @@ export class ReservationConfirmationPage {
   }
 
   confirmReservation() {
+    const date = new Date();
+    const hour = date.getHours();
+    if (hour >= 0 && hour <= 1) {
+      this.showAlert('Bank Maintenance', 'Bank is currently undergoing maintenance, please try again later!');
+      return;
+    }
+    
     this.alertController.create({
       header: 'Confirm Reservation',
       message: 'Are you sure you want to confirm this reservation?',
