@@ -19,8 +19,78 @@
     </ion-toolbar>
   </ion-header>
 
-    <ion-card *ngIf="!isLoading && loadedReservation.length === 0" color="danger">
-      <ion-card-content>You have no reservations yet.</ion-card-content>
+  <ion-card *ngIf="!isLoading && loadedReservation.length === 0" color="danger">
+    <ion-card-content>You have no reservations yet.</ion-card-content>
+  </ion-card>
+
+  <div *ngIf="!isLoading && loadedReservation.length > 0">
+
+    <ion-card *ngFor="let item of loadedReservation">
+      <ion-item-divider color="dark">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col class="ion-text-start">Reservation Date</ion-col>
+            <ion-col size="auto">{{ item.date }}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item-divider>
+      <ion-card-header color="pink" [routerLink]="'edit/' + item.id.toString()">
+        <ion-grid fixed>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="auto">
+              <ion-avatar class="ion-margin-end">
+                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+            </ion-col>
+            <ion-col>
+              <ion-text style="font-size: larger; font-weight: bold;">{{ item.student_name }}</ion-text>
+            </ion-col>
+            <ion-col size="auto">
+              <div [ngSwitch]="item.status">
+                <ion-badge *ngSwitchCase="0" color="warning">
+                  <ion-icon name="alert-circle-outline"></ion-icon>
+                  Unpaid
+                </ion-badge>
+                <ion-badge *ngSwitchCase="1" color="medium">
+                  <ion-icon name="time-outline"></ion-icon>
+                  Pending
+                </ion-badge>
+                <ion-badge *ngSwitchCase="2" color="danger">
+                  <ion-icon name="close-circle-outline"></ion-icon>
+                  Cancelled
+                </ion-badge>
+                <ion-badge *ngSwitchCase="3" color="success">
+                  <ion-icon name="checkmark-circle-outline"></ion-icon>
+                  Redeemed
+                </ion-badge>
+                <ion-badge *ngSwitchDefault color="dark">Unknown</ion-badge>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid fixed>
+          <ion-row class="ion-margin-top ion-margin-bottom ion-align-items-center">
+            <ion-col class="ion-text-start">Order Summary</ion-col>
+            <ion-col size="auto">
+              <ion-button size="small" color="danger" (click)="cancelReservation(item)" *ngIf="item.status === 1">
+                <ion-icon slot="start" shape="round" name="close-circle-outline"></ion-icon>Cancel Reservation
+              </ion-button>
+            </ion-col>
+          </ion-row>
+          <div class="divider"></div>
+          <ion-row class="ion-margin-top">
+            <ion-col class="ion-text-start">{{ item.menu_name }}</ion-col>
+            <ion-col size="auto" style="font-weight: bold;">{{ item.amount_paid | currency: 'RM' }}</ion-col>
+          </ion-row>
+          <ion-row class="ion-margin-top">
+            <ion-col class="ion-text-start">Quantity</ion-col>
+            <ion-col size="auto" style="font-weight: bold;">x {{ item.quantity }}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
     </ion-card>
+  </div>
 
 </ion-content>

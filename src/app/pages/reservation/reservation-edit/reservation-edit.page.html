@@ -1,13 +1,116 @@
 <ion-header [translucent]="false">
   <ion-toolbar>
-    <ion-title>reservation-edit</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/pages/reservations"></ion-back-button>
+    </ion-buttons>
+    <ion-title>View Reservation</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="true">
+        <ion-icon slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">reservation-edit</ion-title>
+      <ion-title size="large">View Reservation</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <div class="ion-text-center" *ngIf="isLoading">
+    <ion-spinner name="dots"></ion-spinner>
+  </div>
+
+  <ion-card *ngIf="!isLoading && loadedData">
+    <ion-item-divider color="dark">
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col class="ion-text-start">Reservation Date</ion-col>
+          <ion-col size="auto">{{ loadedData.date }}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item-divider>
+    <ion-card-header color="pink">
+      <ion-grid fixed>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="auto">
+            <ion-avatar class="ion-margin-end">
+              <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </ion-avatar>
+          </ion-col>
+          <ion-col>
+            <ion-text style="font-size: larger; font-weight: bold;">{{ loadedData.student_name }}</ion-text>
+          </ion-col>
+          <ion-col size="auto">
+            <div [ngSwitch]="loadedData.status">
+              <ion-badge *ngSwitchCase="0" color="warning">
+                <ion-icon name="alert-circle-outline"></ion-icon>
+                Unpaid
+              </ion-badge>
+              <ion-badge *ngSwitchCase="1" color="medium">
+                <ion-icon name="time-outline"></ion-icon>
+                Pending
+              </ion-badge>
+              <ion-badge *ngSwitchCase="2" color="danger">
+                <ion-icon name="close-circle-outline"></ion-icon>
+                Cancelled
+              </ion-badge>
+              <ion-badge *ngSwitchCase="3" color="success">
+                <ion-icon name="checkmark-circle-outline"></ion-icon>
+                Redeemed
+              </ion-badge>
+              <ion-badge *ngSwitchDefault color="dark">Unknown</ion-badge>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid fixed>
+        <ion-row class="ion-margin-top ion-margin-bottom ion-align-items-center">
+          <ion-col class="ion-text-start">Order Summary</ion-col>
+          <ion-col size="auto">
+            <ion-button size="small" color="danger" (click)="cancelReservation(loadedData)" *ngIf="loadedData.status === 1">
+              <ion-icon slot="start" shape="round" name="close-circle-outline"></ion-icon>Cancel Reservation
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <div class="divider"></div>
+        <ion-row class="ion-margin-top">
+          <ion-col class="ion-text-start">{{ loadedData.menu_name }}</ion-col>
+          <ion-col size="auto" style="font-weight: bold;">{{ loadedData.amount_paid | currency: 'RM' }}</ion-col>
+        </ion-row>
+        <ion-row class="ion-margin-top">
+          <ion-col class="ion-text-start">Quantity</ion-col>
+          <ion-col size="auto" style="font-weight: bold;">x {{ loadedData.quantity }}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="!isLoading && loadedData.status === 0" color="danger">
+    <ion-card-content>No payment recorded.</ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="!isLoading && loadedData.status !== 0">
+    <ion-card-content class="ion-text-start">
+      <ion-text>
+        <h3 style="font-weight: bold;">Payment Summary</h3>
+        <div class="divider" style="margin: 10px 0"></div>
+        <p>Status: <ion-badge color="success">{{ loadedPayment.status_text }}</ion-badge></p>
+        <p>Transaction Ref: {{ loadedPayment.transaction_id }}</p>
+        <p>Payment Date: {{ loadedPayment.updated_at }}</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
+
+<ion-footer *ngIf="!isLoading && loadedData.status === 0">
+  <ion-toolbar>
+    <ion-button expand="block" color="success" (click)="makePayment()">Make Payment</ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -38,6 +38,39 @@ export class ReservationIndexPage implements OnInit, OnDestroy {
     });
   }
 
+  cancelReservation(item: Reservation) {
+    this.alertController.create({
+      header: 'Cancel Reservation',
+      message: 'Are you sure you want to cancel this reservation?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.isLoading = true;
+            this.reservationService.delete({
+              id: item.id,
+            }).subscribe({
+              next: (response: any) => {
+                this.isLoading = false;
+                this.showAlert('Success', 'Reservation has been canceled successfully!');
+                this.ionViewWillEnter();
+              }, error: (error: any) => {
+                this.isLoading = false;
+                this.showToast('An error occurred, please try again later!', 2000, 'warning');
+              }
+            });
+          }
+        },
+      ]
+    }).then(alertElement => {
+      alertElement.present();
+    });
+  }
+
   ngOnDestroy(): void {
     if (this.reservationSub) {
       this.reservationSub.unsubscribe();
