@@ -54,7 +54,7 @@ export class MenuEditPage {
           text: 'Camera',
           icon: 'camera',
           handler: () => {
-            console.log('Camera clicked');
+            // take photo
           }
         },
         {
@@ -62,7 +62,6 @@ export class MenuEditPage {
           icon: 'image',
           handler: () => {
             // pick from file
-
           }
         },
         {

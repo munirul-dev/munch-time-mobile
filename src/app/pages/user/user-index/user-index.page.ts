@@ -23,7 +23,6 @@ export class UserIndexPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.userSub = this.userService.userList.subscribe(users => {
       this.loadedUser = users;
-      console.log(this.loadedUser);
     });
   }
 
