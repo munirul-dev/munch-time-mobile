@@ -1,0 +1,38 @@
+.header {
+  margin: 16px;
+  margin-top: 5vh;
+}
+
+.app-icon {
+  width: 50%;
+  height: auto;
+}
+
+.input-field {
+  margin-top: 10px !important;
+}
+
+.register-row {
+  padding: 4px;
+
+  ion-text {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: small;
+    // color: black;
+  }
+
+  ion-col:first-child {
+    text-align: left;
+  }
+
+  ion-col:last-child {
+    text-align: right;
+  }
+}
+
+.gradient {
+  --background: linear-gradient(180deg, #F771FB 0%, #FC98E2 50%, #FFF9FC 100%);
+  height: 100%;
+  width: 100%;
+}

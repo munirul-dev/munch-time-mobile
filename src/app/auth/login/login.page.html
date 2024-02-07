@@ -13,11 +13,11 @@
           <ion-title size="large">Sign In</ion-title>
 
           <ion-item class="item-{{ (username.invalid && username.touched) || (username.invalid && form.submitted) ? 'start' : 'single' }} input-field" lines="full">
-            <ion-input ngModel required="true" type="email" name="username" #username="ngModel" autocomplete="email" placeholder="E-Mel" inputmode="email" [pattern]="EMAIL_REGEX"></ion-input>
+            <ion-input ngModel required="true" type="email" name="username" #username="ngModel" autocomplete="email" placeholder="E-Mail" inputmode="email" [pattern]="EMAIL_REGEX"></ion-input>
           </ion-item>
           <ion-item class="item-end" *ngIf="(username.invalid && username.touched) || (username.invalid && form.submitted)" lines="none">
             <ion-text class="error-text">
-              <p *ngIf="password.errors?.['required']">This field is required.</p>
+              <p *ngIf="username.errors?.['required']">This field is required.</p>
               <p *ngIf="username.errors?.['pattern']">Email must be in a valid format.</p>
             </ion-text>
           </ion-item>

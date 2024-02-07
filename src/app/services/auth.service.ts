@@ -119,6 +119,14 @@ export class AuthService {
     );
   }
 
+  register(body: any) {
+    return this.http.post(this.connections.api + this.connections.auth.register, body, {
+      headers: {
+        'Content-Type': 'application/json;'
+      }
+    }).pipe(take(1));
+  }
+
   updateProfile(body: any) {
     return this.auth.pipe(
       filter((auth: User | null): auth is User => auth !== null),
