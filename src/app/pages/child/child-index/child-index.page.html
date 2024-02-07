@@ -19,6 +19,10 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-card *ngIf="!isLoading && loadedStudent.length === 0" color="danger">
+    <ion-card-content>You have no childs yet.</ion-card-content>
+  </ion-card>
+
   <ion-list *ngIf="!isLoading">
     <ion-card *ngFor="let item of loadedStudent">
       <ion-card-header color="pink">

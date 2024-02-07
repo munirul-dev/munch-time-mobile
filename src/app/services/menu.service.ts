@@ -22,9 +22,9 @@ export class MenuService {
     return this._menuList.asObservable();
   }
 
-  index() {
+  index(body: any) {
     return this.authService.auth.pipe(
-      switchMap((auth: User | null) => this.http.post(this.connections.api + this.connections.menu.index, null, this.connections.options(auth ? auth.token : ''))),
+      switchMap((auth: User | null) => this.http.post(this.connections.api + this.connections.menu.index, body, this.connections.options(auth ? auth.token : ''))),
       take(1),
       map((result: any) => result.data),
       tap((menus: Menu[]) => this._menuList.next(menus)),

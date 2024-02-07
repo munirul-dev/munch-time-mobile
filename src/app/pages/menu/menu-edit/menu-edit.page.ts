@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { AlertController, NavController, ToastController } from '@ionic/angular';
+import { ActionSheetController, AlertController, NavController, ToastController } from '@ionic/angular';
 import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
@@ -10,6 +10,7 @@ import { MenuService } from 'src/app/services/menu.service';
   styleUrls: ['./menu-edit.page.scss'],
 })
 export class MenuEditPage {
+  file: File | null = null;
   image: string = '';
   category: string = '';
   name: string = '';
@@ -24,6 +25,7 @@ export class MenuEditPage {
     private menuService: MenuService,
     private navController: NavController,
     private activatedRoute: ActivatedRoute,
+    private actionSheetController: ActionSheetController,
   ) {
     this.activatedRoute.paramMap.subscribe(params => {
       this.menuService.edit({
@@ -41,6 +43,45 @@ export class MenuEditPage {
           this.showToast('An error occurred, please try again later!', 2000, 'warning');
         }
       });
+    });
+  }
+
+  pictureAction() {
+    this.actionSheetController.create({
+      header: 'Edit Image',
+      buttons: [
+        {
+          text: 'Camera',
+          icon: 'camera',
+          handler: () => {
+            console.log('Camera clicked');
+          }
+        },
+        {
+          text: 'Gallery',
+          icon: 'image',
+          handler: () => {
+            // pick from file
+
+          }
+        },
+        {
+          text: 'Remove',
+          icon: 'trash',
+          role: 'destructive',
+          handler: () => {
+            this.file = null;
+            this.image = '';
+          }
+        },
+        {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+        }
+      ]
+    }).then(actionSheetElement => {
+      actionSheetElement.present();
     });
   }
 

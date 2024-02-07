@@ -28,7 +28,9 @@ export class MenuIndexPage implements OnInit, OnDestroy {
 
   ionViewWillEnter() {
     this.isLoading = true;
-    this.menuService.index().subscribe({
+    this.menuService.index({
+      status: 'all'
+    }).subscribe({
       next: (response: any) => {
         this.isLoading = false;
       }, error: (error: any) => {
