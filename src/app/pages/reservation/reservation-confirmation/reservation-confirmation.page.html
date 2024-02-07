@@ -29,15 +29,15 @@
             </ion-avatar>
           </ion-col>
           <ion-col>
-            <ion-text style="font-size: larger; font-weight: bold;">{{ selectedStudent.name }}</ion-text>
+            <ion-text style="font-size: larger; font-weight: bold;">{{ selectedStudent ? selectedStudent.name : 'Loading...' }}</ion-text>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-header>
     <ion-card-content class="ion-text-start" style="padding: 16px;">
-      <ion-text>Parent: {{ selectedStudent.parent_name }}</ion-text>
+      <ion-text>Parent: {{ selectedStudent ? selectedStudent.parent_name : 'Loading...' }}</ion-text>
       <br>
-      <ion-text>Class: {{ selectedStudent.class_name ? selectedStudent.class_name : 'N/A' }}</ion-text>
+      <ion-text>Class: {{ selectedStudent ? (selectedStudent.class_name ? selectedStudent.class_name : 'N/A') : 'Loading...' }}</ion-text>
     </ion-card-content>
   </ion-card>
 
@@ -50,6 +50,10 @@
 
     <div class="divider"></div>
     <br>
+
+    <div class="ion-text-center" *ngIf="!selectedMenu">
+      <ion-spinner name="dots"></ion-spinner>
+    </div>
 
     <ion-grid fixed *ngIf="selectedMenu">
       <ion-row>
@@ -81,7 +85,9 @@
       <br>
       <ion-row>
         <ion-col>Reservation Date</ion-col>
-        <ion-col size="auto">{{ todayDate.getDate() + "/" + todayDate.getMonth() + "/" + todayDate.getFullYear() }}</ion-col>
+        <ion-col size="auto">
+          <ion-datetime-button datetime="datetime"></ion-datetime-button>
+        </ion-col>
       </ion-row>
       <br>
       <ion-row>
@@ -91,6 +97,11 @@
     </ion-grid>
   </div>
 
+  <ion-modal [keepContentsMounted]="true">
+    <ng-template>
+      <ion-datetime id="datetime" presentation="date" [min]="todayDate.toISOString()" name="date" [(ngModel)]="selectedDate" required></ion-datetime>
+    </ng-template>
+  </ion-modal>
 
 </ion-content>
 

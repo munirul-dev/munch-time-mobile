@@ -5,6 +5,7 @@ import { concatMap } from 'rxjs';
 import { Menu } from 'src/app/model/menu.model';
 import { Student } from 'src/app/model/student.model';
 import { MenuService } from 'src/app/services/menu.service';
+import { ReservationService } from 'src/app/services/reservation.service';
 import { StudentService } from 'src/app/services/student.service';
 
 @Component({
@@ -21,6 +22,7 @@ export class ReservationConfirmationPage {
   totalQuantity: number = 1;
   totalAmount: number = 0;
   todayDate: Date = new Date();
+  selectedDate: string = this.todayDate.toISOString();
 
   constructor(
     private menuService: MenuService,
@@ -28,6 +30,7 @@ export class ReservationConfirmationPage {
     private alertController: AlertController,
     private toastController: ToastController,
     private activatedRoute: ActivatedRoute,
+    private reservationService: ReservationService,
   ) {
     this.activatedRoute.paramMap.subscribe(params => {
       this.selectedStudentId = Number(params.get('childId'));
@@ -42,6 +45,7 @@ export class ReservationConfirmationPage {
       ).subscribe({
         next: (menu: any) => {
           this.selectedMenu = menu.data;
+          this.isLoading = false;
         }, error: (error: any) => {
           this.showToast('An error occurred, please try again later!', 2000, 'warning');
         }
@@ -74,6 +78,24 @@ export class ReservationConfirmationPage {
           text: 'Yes',
           handler: () => {
             this.isLoading = true;
+            this.reservationService.create({
+              menuId: this.selectedMenuId,
+              studentId: this.selectedStudentId,
+              quantity: this.totalQuantity,
+              date: this.selectedDate.split('T')[0],
+            }).subscribe({
+              next: (response: any) => {
+                this.isLoading = false;
+                if (response.data) {
+                  window.open(response.data, '_self');
+                } else {
+                  this.showToast('An error occurred, please try again later!', 2000, 'warning');
+                }
+              }, error: (error: any) => {
+                this.isLoading = false;
+                this.showToast('An error occurred, please try again later!', 2000, 'warning');
+              }
+            });
           }
         },
       ]

@@ -33,7 +33,7 @@ export class ReservationService {
 
   create(body: any) {
     return this.authService.auth.pipe(
-      switchMap((auth: User | null) => this.http.post(this.connections.api + this.connections.reservation.create, body, this.connections.formDataOptions(auth ? auth.token : ''))),
+      switchMap((auth: User | null) => this.http.post(this.connections.api + this.connections.reservation.create, body, this.connections.options(auth ? auth.token : ''))),
       take(1),
     );
   }
@@ -47,7 +47,7 @@ export class ReservationService {
 
   update(body: any) {
     return this.authService.auth.pipe(
-      switchMap((auth: User | null) => this.http.post(this.connections.api + this.connections.reservation.update, body, this.connections.formDataOptions(auth ? auth.token : ''))),
+      switchMap((auth: User | null) => this.http.post(this.connections.api + this.connections.reservation.update, body, this.connections.options(auth ? auth.token : ''))),
       take(1),
     );
   }
