@@ -1,13 +1,101 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="false">
   <ion-toolbar>
-    <ion-title>reservation-confirmation</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/pages/reservations/create/' + selectedStudentId.toString()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Confirm Reservation</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="true">
+        <ion-icon slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">reservation-confirmation</ion-title>
+      <ion-title size="large">Confirm Reservation</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-card *ngIf="selectedStudent">
+    <ion-card-header color="pink">
+      <ion-grid fixed>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="auto">
+            <ion-avatar class="ion-margin-end">
+              <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </ion-avatar>
+          </ion-col>
+          <ion-col>
+            <ion-text style="font-size: larger; font-weight: bold;">{{ selectedStudent.name }}</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+    <ion-card-content class="ion-text-start" style="padding: 16px;">
+      <ion-text>Parent: {{ selectedStudent.parent_name }}</ion-text>
+      <br>
+      <ion-text>Class: {{ selectedStudent.class_name ? selectedStudent.class_name : 'N/A' }}</ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="ion-padding-start ion-padding-end">
+
+    <br>
+    <ion-text>
+      <h4>Order Summary</h4>
+    </ion-text>
+
+    <div class="divider"></div>
+    <br>
+
+    <ion-grid fixed *ngIf="selectedMenu">
+      <ion-row>
+        <ion-col>{{ selectedMenu.name }}</ion-col>
+        <ion-col size="auto" style="font-weight: bold;">{{ selectedMenu.price | currency: 'RM' }}</ion-col>
+      </ion-row>
+      <ion-row style="margin-top: 5px;">
+        <ion-col>Quantity</ion-col>
+        <ion-col size="auto" style="font-weight: bold;">x{{ totalQuantity }}</ion-col>
+      </ion-row>
+      <br>
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col size="auto">
+          <ion-button size="small" color="danger" shape="round" (click)="decreaseCount()" [disabled]="totalQuantity <= 1">
+            <ion-icon slot="icon-only" name="remove-circle-outline"></ion-icon>
+          </ion-button>
+          <ion-button size="small" color="success" shape="round" (click)="increaseCount()">
+            <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <br>
+    <br>
+
+    <div class="divider"></div>
+    <ion-grid fixed *ngIf="selectedMenu">
+      <br>
+      <ion-row>
+        <ion-col>Reservation Date</ion-col>
+        <ion-col size="auto">{{ todayDate.getDate() + "/" + todayDate.getMonth() + "/" + todayDate.getFullYear() }}</ion-col>
+      </ion-row>
+      <br>
+      <ion-row>
+        <ion-col style="font-size: x-large; font-weight: bold;">Total</ion-col>
+        <ion-col style="font-size: x-large; font-weight: bold;" size="auto">{{ selectedMenu.price * totalQuantity | currency: 'RM' }}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block" (click)="confirmReservation()">Confirm Reservation</ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,13 +1,50 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="false">
   <ion-toolbar>
-    <ion-title>reservation-select</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="pages/reservations"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Choose Student</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">reservation-select</ion-title>
+      <ion-title size="large">Choose Student</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-card *ngIf="!isLoading && loadedStudent.length === 0" color="danger">
+    <ion-card-content>You have no childs yet.</ion-card-content>
+  </ion-card>
+
+  <ion-list *ngIf="!isLoading">
+    <ion-card *ngFor="let item of loadedStudent" [routerLink]="item.id.toString()">
+      <ion-card-header color="pink">
+        <ion-grid fixed>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="auto">
+              <ion-avatar class="ion-margin-end">
+                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+            </ion-col>
+            <ion-col>
+              <ion-text style="font-size: larger; font-weight: bold;">{{ item.name }}</ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+      <ion-card-content class="ion-text-start" style="padding: 16px;">
+        <ion-text>Parent: {{ item.parent_name }}</ion-text>
+        <br>
+        <ion-text>Class: {{ item.class_name ? item.class_name : 'N/A' }}</ion-text>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
 </ion-content>
