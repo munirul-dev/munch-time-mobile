@@ -115,10 +115,23 @@ const routes: Routes = [
           },
           {
             path: 'create',
-            loadChildren: () => import('./reservation/reservation-create/reservation-create.module').then(m => m.ReservationCreatePageModule)
+            children: [
+              {
+                path: '', // Child Selection
+                loadChildren: () => import('./reservation/reservation-select/reservation-select.module').then(m => m.ReservationSelectPageModule)
+              },
+              {
+                path: ':childId', // Menu Selection
+                loadChildren: () => import('./reservation/reservation-menu/reservation-menu.module').then(m => m.ReservationMenuPageModule)
+              },
+              {
+                path: ':childId/:menuId', // Confirmation
+                loadChildren: () => import('./reservation/reservation-confirmation/reservation-confirmation.module').then(m => m.ReservationConfirmationPageModule)
+              },
+            ]
           },
           {
-            path: ':id',
+            path: 'edit/:id',
             loadChildren: () => import('./reservation/reservation-edit/reservation-edit.module').then( m => m.ReservationEditPageModule)
           },
         ]
