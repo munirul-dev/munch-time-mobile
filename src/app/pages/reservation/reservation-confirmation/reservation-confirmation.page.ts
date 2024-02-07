@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { concatMap } from 'rxjs';
 import { Menu } from 'src/app/model/menu.model';
 import { Student } from 'src/app/model/student.model';
@@ -31,6 +31,7 @@ export class ReservationConfirmationPage {
     private toastController: ToastController,
     private activatedRoute: ActivatedRoute,
     private reservationService: ReservationService,
+    private navController: NavController,
   ) {
     this.activatedRoute.paramMap.subscribe(params => {
       this.selectedStudentId = Number(params.get('childId'));
@@ -86,6 +87,7 @@ export class ReservationConfirmationPage {
             }).subscribe({
               next: (response: any) => {
                 this.isLoading = false;
+                this.navController.navigateBack('/pages/reservations');
                 if (response.data) {
                   window.open(response.data, '_self');
                 } else {

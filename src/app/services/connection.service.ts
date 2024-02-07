@@ -57,6 +57,7 @@ export class ConnectionService {
     return {
       index: 'reservation/index',
       create: 'reservation/create',
+      repay: 'reservation/repay',
       edit: 'reservation/edit',
       update: 'reservation/update',
       destroy: 'reservation/destroy',

@@ -72,7 +72,39 @@ export class ReservationEditPage {
   }
 
   makePayment() {
-    // TODO
+    this.alertController.create({
+      header: 'Make Payment',
+      message: 'Are you sure you want to make payment for this reservation?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.isLoading = true;
+            this.reservationService.repay({
+              id: this.loadedData.id,
+            }).subscribe({
+              next: (response: any) => {
+                this.isLoading = false;
+                if (response.data) {
+                  window.open(response.data, '_self');
+                } else {
+                  this.showToast('An error occurred, please try again later!', 2000, 'warning');
+                }
+              }, error: (error: any) => {
+                this.isLoading = false;
+                this.showToast('An error occurred, please try again later!', 2000, 'warning');
+              }
+            });
+          }
+        },
+      ]
+    }).then(alertElement => {
+      alertElement.present();
+    });
   }
 
   private showAlert(title: string, text: string) {

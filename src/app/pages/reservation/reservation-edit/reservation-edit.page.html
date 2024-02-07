@@ -73,7 +73,7 @@
         <ion-row class="ion-margin-top ion-margin-bottom ion-align-items-center">
           <ion-col class="ion-text-start">Order Summary</ion-col>
           <ion-col size="auto">
-            <ion-button size="small" color="danger" (click)="cancelReservation(loadedData)" *ngIf="loadedData.status === 1">
+            <ion-button size="small" color="danger" (click)="cancelReservation(loadedData)" *ngIf="loadedData.status === 0 || loadedData.status === 1">
               <ion-icon slot="start" shape="round" name="close-circle-outline"></ion-icon>Cancel Reservation
             </ion-button>
           </ion-col>
@@ -100,9 +100,9 @@
       <ion-text>
         <h3 style="font-weight: bold;">Payment Summary</h3>
         <div class="divider" style="margin: 10px 0"></div>
-        <p>Status: <ion-badge color="success">{{ loadedPayment.status_text }}</ion-badge></p>
-        <p>Transaction Ref: {{ loadedPayment.transaction_id }}</p>
-        <p>Payment Date: {{ loadedPayment.updated_at }}</p>
+        <p>Status: <ion-badge [color]="loadedPayment.status === 0 ? 'danger' : 'success'">{{ loadedPayment.status_text }}</ion-badge></p>
+        <p>Transaction Ref: {{ loadedPayment.transaction_id ? loadedPayment.transaction_id : 'N/A' }}</p>
+        <p>Transaction Date: {{ loadedPayment.updated_at }}</p>
       </ion-text>
     </ion-card-content>
   </ion-card>
