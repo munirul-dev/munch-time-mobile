@@ -49,6 +49,12 @@ export class QrScanPage implements AfterViewInit {
   }
 
   async startScan() {
+    // check if loading is already active
+    if (!this.loading) {
+      this.loading = await this.loadingCtrl.create({});
+      await this.loading.present();
+    }
+
     // Not working on iOS standalone mode!
     const stream = await navigator.mediaDevices.getUserMedia({
       video: { facingMode: 'environment' }
@@ -58,8 +64,6 @@ export class QrScanPage implements AfterViewInit {
     // Required for Safari
     this.videoElement.setAttribute('playsinline', true);
 
-    this.loading = await this.loadingCtrl.create({});
-    await this.loading.present();
 
     this.videoElement.play();
     requestAnimationFrame(this.scan.bind(this));
@@ -129,9 +133,13 @@ export class QrScanPage implements AfterViewInit {
         inversionAttempts: 'dontInvert'
       });
 
+      this.scanActive = false;
+
       if (code) {
         this.qrCodeData = code.data;
         this.checkReservation();
+      } else {
+        this.showAlert('Error', 'No QR code found, please try again!');
       }
     };
     if (file) {

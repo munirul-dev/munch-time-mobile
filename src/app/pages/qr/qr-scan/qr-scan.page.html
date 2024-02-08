@@ -20,82 +20,85 @@
     </ion-toolbar>
   </ion-header>
 
-  <!-- Shows our camera stream -->
-  <video #video [hidden]="!scanActive" width="100%" height="100%"></video>
+  <div class="container">
+    <!-- Shows our camera stream -->
+    <video #video [hidden]="!scanActive" width="100%" height="100%"></video>
 
-  <!-- Used to render the camera stream images -->
-  <canvas #canvas hidden></canvas>
+    <!-- Used to render the camera stream images -->
+    <canvas #canvas hidden></canvas>
 
-  <ion-card *ngIf="qrCodeData && !isLoading && studentData">
-    <ion-item-divider color="dark" *ngIf="reservationData">
-      <ion-grid fixed>
-        <ion-row>
-          <ion-col class="ion-text-start">Reservation Date</ion-col>
-          <ion-col size="auto">{{ reservationData.date }}</ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item-divider>
-    <ion-card-header color="pink">
-      <ion-grid fixed>
-        <ion-row class="ion-align-items-center">
-          <ion-col size="auto">
-            <ion-avatar class="ion-margin-end">
-              <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-            </ion-avatar>
-          </ion-col>
-          <ion-col>
-            <ion-text style="font-size: larger; font-weight: bold;">{{ studentData.name }}</ion-text>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-header>
-    <ion-card-content class="ion-text-start">
+    <ion-card *ngIf="qrCodeData && !isLoading && studentData">
+      <ion-item-divider color="dark" *ngIf="reservationData">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col class="ion-text-start">Reservation Date</ion-col>
+            <ion-col size="auto">{{ reservationData.date }}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item-divider>
+      <ion-card-header color="pink">
+        <ion-grid fixed>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="auto">
+              <ion-avatar class="ion-margin-end">
+                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+            </ion-col>
+            <ion-col>
+              <ion-text style="font-size: larger; font-weight: bold;">{{ studentData.name }}</ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+      <ion-card-content class="ion-text-start">
 
-      <div>
+        <div>
+          <br>
+          <ion-text><b>Parent/Guardian:</b> {{ studentData.parent_name }}</ion-text>
+          <br>
+          <ion-text><b>Age:</b> {{ studentData.age }}</ion-text>
+          <br>
+          <ion-text><b>Class:</b> {{ studentData.class_name ? studentData.class_name : 'N/A' }}</ion-text>
+          <br>
+          <ion-text><b>Year Level:</b> {{ studentData.year_level ? studentData.year_level : 'N/A' }}</ion-text>
+          <br>
+          <ion-text><b>Allergies:</b> {{ studentData.allergies ? studentData.allergies : 'N/A' }}</ion-text>
+        </div>
+
         <br>
-        <ion-text><b>Parent/Guardian:</b> {{ studentData.parent_name }}</ion-text>
-        <br>
-        <ion-text><b>Age:</b> {{ studentData.age }}</ion-text>
-        <br>
-        <ion-text><b>Class:</b> {{ studentData.class_name ? studentData.class_name : 'N/A' }}</ion-text>
-        <br>
-        <ion-text><b>Year Level:</b> {{ studentData.year_level ? studentData.year_level : 'N/A' }}</ion-text>
-        <br>
-        <ion-text><b>Allergies:</b> {{ studentData.allergies ? studentData.allergies : 'N/A' }}</ion-text>
-      </div>
+        <div class="divider"></div>
 
-      <br>
-      <div class="divider"></div>
+        <ion-grid fixed *ngIf="reservationData">
+          <ion-row class="ion-margin-top ion-align-items-center">
+            <ion-col class="ion-text-start" style="font-size: larger; font-weight: bold;">Order Summary</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="ion-text-start">{{ reservationData.menu_name }}</ion-col>
+            <ion-col size="auto" style="font-weight: bold;">{{ reservationData.amount_paid | currency: 'RM' }}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="ion-text-start">Quantity</ion-col>
+            <ion-col size="auto" style="font-weight: bold;">x {{ reservationData.quantity }}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="ion-text-start">Reservation Date</ion-col>
+            <ion-col size="auto" style="font-weight: bold;">{{ reservationData.date }}</ion-col>
+          </ion-row>
+        </ion-grid>
 
-      <ion-grid fixed *ngIf="reservationData">
-        <ion-row class="ion-margin-top ion-align-items-center">
-          <ion-col class="ion-text-start" style="font-size: larger; font-weight: bold;">Order Summary</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="ion-text-start">{{ reservationData.menu_name }}</ion-col>
-          <ion-col size="auto" style="font-weight: bold;">{{ reservationData.amount_paid | currency: 'RM' }}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="ion-text-start">Quantity</ion-col>
-          <ion-col size="auto" style="font-weight: bold;">x {{ reservationData.quantity }}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="ion-text-start">Reservation Date</ion-col>
-          <ion-col size="auto" style="font-weight: bold;">{{ reservationData.date }}</ion-col>
-        </ion-row>
-      </ion-grid>
+        <ion-card *ngIf="!reservationData" color="danger" style="margin-bottom: 0; margin-left: 0; margin-right: 0;">
+          <ion-card-content>This student has no reservation left for today.</ion-card-content>
+        </ion-card>
 
-      <ion-card *ngIf="!reservationData" color="danger" style="margin-bottom: 0; margin-left: 0; margin-right: 0;">
-        <ion-card-content>This student has no reservation left for today.</ion-card-content>
-      </ion-card>
+      </ion-card-content>
+      <ion-button *ngIf="reservationData" class="ion-margin" style="margin-top: 0;" size="small" expand="block" color="success" (click)="redeemReservation()">Redeem Reservation</ion-button>
+    </ion-card>
 
-    </ion-card-content>
-    <ion-button *ngIf="reservationData" class="ion-margin" style="margin-top: 0;" size="small" expand="block" color="success" (click)="redeemReservation()">Redeem Reservation</ion-button>
-  </ion-card>
+    <ion-card *ngIf="qrCodeData && !isLoading && !studentData" color="danger">
+      <ion-card-content>Invalid QR Code</ion-card-content>
+    </ion-card>
+  </div>
 
-  <ion-card *ngIf="qrCodeData && !isLoading && !studentData" color="danger">
-    <ion-card-content>Invalid QR Code</ion-card-content>
-  </ion-card>
 
 </ion-content>
 
