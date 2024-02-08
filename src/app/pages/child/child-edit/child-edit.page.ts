@@ -15,6 +15,7 @@ export class ChildEditPage {
   year_level: string = '';
   class_name: string = '';
   allergies: string = '';
+  qr_code: string = '';
 
   constructor(
     private alertController: AlertController,
@@ -29,8 +30,11 @@ export class ChildEditPage {
       }).subscribe({
         next: (response: any) => {
           this.name = response.data.name;
+          this.age = response.data.age;
           this.year_level = response.data.year_level;
           this.class_name = response.data.class_name;
+          this.allergies = response.data.allergies;
+          this.qr_code = response.data.qr_code;
         }, error: (error: any) => {
           this.showToast('An error occurred, please try again later!', 2000, 'warning');
         }
@@ -75,6 +79,10 @@ export class ChildEditPage {
         alertElement.present();
       });
     }
+  }
+
+  downloadQR() {
+    window.open(this.qr_code, '_blank');
   }
 
   private showAlert(title: string, text: string) {

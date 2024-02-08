@@ -63,10 +63,22 @@
     </ion-card>
   </form>
 
+  <ion-card *ngIf="qr_code">
+    <ion-card-header class="ion-text-center">
+      <ion-card-subtitle>Student's QR Code</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <img style="width: 100%;" [src]="this.qr_code" alt="QR Code">
+    </ion-card-content>
+    <ion-button class="ion-margin" style="margin-top: 0;" (click)="downloadQR()" expand="block">
+      <ion-icon slot="start" name="cloud-download-outline"></ion-icon>Download QR Code
+    </ion-button>
+  </ion-card>
+
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-button [disabled]="!form.valid" expand="block" (click)="submitForm(form)">Confirm</ion-button>
+    <ion-button [disabled]="!form.valid" expand="block" (click)="submitForm(form)" color="success">Confirm</ion-button>
   </ion-toolbar>
 </ion-footer>
