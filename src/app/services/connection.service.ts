@@ -59,8 +59,7 @@ export class ConnectionService {
       create: 'reservation/create',
       repay: 'reservation/repay',
       edit: 'reservation/edit',
-      update: 'reservation/update',
-      destroy: 'reservation/destroy',
+      cancel: 'reservation/cancel',
       scanQR: 'reservation/scanQR',
       redeem: 'reservation/redeem',
     };

@@ -45,6 +45,13 @@ export class ReservationService {
     );
   }
 
+  scanQR(body: any) {
+    return this.authService.auth.pipe(
+      switchMap((auth: User | null) => this.http.post(this.connections.api + this.connections.reservation.scanQR, body, this.connections.options(auth ? auth.token : ''))),
+      take(1),
+    );
+  }
+
   edit(body: any) {
     return this.authService.auth.pipe(
       switchMap((auth: User | null) => this.http.post(this.connections.api + this.connections.reservation.edit, body, this.connections.options(auth ? auth.token : ''))),
@@ -52,16 +59,16 @@ export class ReservationService {
     );
   }
 
-  update(body: any) {
+  redeem(body: any) {
     return this.authService.auth.pipe(
-      switchMap((auth: User | null) => this.http.post(this.connections.api + this.connections.reservation.update, body, this.connections.options(auth ? auth.token : ''))),
+      switchMap((auth: User | null) => this.http.post(this.connections.api + this.connections.reservation.redeem, body, this.connections.options(auth ? auth.token : ''))),
       take(1),
     );
   }
 
-  delete(body: any) {
+  cancel(body: any) {
     return this.authService.auth.pipe(
-      switchMap((auth: User | null) => this.http.post(this.connections.api + this.connections.reservation.destroy, body, this.connections.options(auth ? auth.token : ''))),
+      switchMap((auth: User | null) => this.http.post(this.connections.api + this.connections.reservation.cancel, body, this.connections.options(auth ? auth.token : ''))),
       take(1),
     );
   }

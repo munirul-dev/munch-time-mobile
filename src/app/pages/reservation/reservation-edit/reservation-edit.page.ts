@@ -51,7 +51,7 @@ export class ReservationEditPage {
           text: 'Yes',
           handler: () => {
             this.isLoading = true;
-            this.reservationService.delete({
+            this.reservationService.cancel({
               id: item.id,
             }).subscribe({
               next: (response: any) => {
