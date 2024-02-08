@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AlertController, NavController, ToastController } from '@ionic/angular';
+import { ActionSheetController, AlertController, NavController, ToastController } from '@ionic/angular';
 import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { MenuService } from 'src/app/services/menu.service';
   styleUrls: ['./menu-create.page.scss'],
 })
 export class MenuCreatePage {
+  file: File | Blob | null = null;
   image: string = '';
   category: string = '';
   name: string = '';
@@ -16,13 +17,69 @@ export class MenuCreatePage {
   price: number | null = null;
   quantity: number | null = null;
   status: boolean = true;
+  @ViewChild('imagePicker') imagePickerInput: ElementRef<HTMLInputElement> | undefined;
 
   constructor(
     private alertController: AlertController,
     private toastController: ToastController,
     private menuService: MenuService,
     private navController: NavController,
+    private actionSheetController: ActionSheetController,
   ) { }
+
+  selectImage() {
+    let options: any = [
+      {
+        text: 'Upload File',
+        icon: 'folder',
+        handler: () => {
+          this.imagePickerInput?.nativeElement.click();
+        }
+      }
+    ];
+
+    if (this.image !== '') {
+      options.push({
+        text: 'Remove',
+        icon: 'trash',
+        role: 'destructive',
+        handler: () => {
+          this.file = null;
+          this.image = '';
+        }
+      });
+    }
+
+    options.push({
+      text: 'Cancel',
+      icon: 'close',
+      role: 'cancel',
+    });
+
+    this.actionSheetController.create({
+      header: this.image ? 'Edit Image' : 'Add Image',
+      buttons: options
+    }).then(actionSheetElement => {
+      actionSheetElement.present();
+    });
+  }
+
+  pickImageFile(event: any) {
+    if (event.target.files[0]) {
+      const fileFormat = event.target.files[0].type.split('/')[1];
+      if (fileFormat === 'jpeg' || fileFormat === 'png' || fileFormat === 'jpg') {
+        let selectedFile = (event.target as HTMLInputElement).files;
+        if (selectedFile) {
+          this.file = selectedFile[0];
+          this.image = URL.createObjectURL(this.file);
+        }
+        event.target.value = null;
+      } else {
+        this.showAlert('Format Tidak Sah', `Format fail yang dipilih adalah format <b>${fileFormat}</b>. Pastikan anda memilih format imej yang disokong, iaitu <b>jpg, jpeg atau png</b>.`);
+        event.target.value = null;
+      }
+    }
+  }
 
   submitForm(form: NgForm) {
     if (!form.valid) {
@@ -39,15 +96,18 @@ export class MenuCreatePage {
           {
             text: 'Confirm',
             handler: () => {
-              this.menuService.create({
-                // image: this.image,
-                category: this.category,
-                name: this.name,
-                description: this.description,
-                price: this.price,
-                quantity: this.quantity,
-                status: this.status,
-              }).subscribe({
+              let body = new FormData();
+              if (this.file) {
+                body.append('file', this.file);
+              }
+              body.append('image', this.image);
+              body.append('category', this.category);
+              body.append('name', this.name);
+              body.append('description', this.description);
+              body.append('price', this.price?.toString() || '0');
+              body.append('quantity', this.quantity?.toString() || '0');
+              body.append('status', this.status ? '1' : '0');
+              this.menuService.create(body).subscribe({
                 next: (response: any) => {
                   this.showToast('Menu created successfully!', 2000, 'checkmark');
                   this.navController.navigateBack('/pages/menus');
