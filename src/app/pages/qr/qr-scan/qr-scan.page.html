@@ -109,23 +109,23 @@
     <input #fileinput type="file" accept="image/*;capture=camera" hidden (change)="handleFile($event)">
 
     <!-- Trigger the file input -->
-    <ion-button expand="full" (click)="captureImage()">
+    <ion-button expand="block" (click)="captureImage()">
       <ion-icon slot="start" name="camera"></ion-icon>
       Capture Image
     </ion-button>
 
-    <ion-button expand="full" (click)="startScan()" *ngIf="!scanActive && !qrCodeData">
+    <ion-button expand="block" (click)="startScan()" *ngIf="!scanActive && !qrCodeData">
       <ion-icon slot="start" name="scan-outline"></ion-icon>
       Start scan
     </ion-button>
 
-    <ion-button expand="full" (click)="reset()" color="warning" *ngIf="!scanActive && qrCodeData">
+    <ion-button expand="block" (click)="reset()" color="warning" *ngIf="!scanActive && qrCodeData">
       <ion-icon slot="start" name="refresh"></ion-icon>
       Reset
     </ion-button>
 
     <!-- Stop our scanner preview if active -->
-    <ion-button expand="full" (click)="stopScan()" color="danger" *ngIf="scanActive">
+    <ion-button expand="block" (click)="stopScan()" color="danger" *ngIf="scanActive">
       <ion-icon slot="start" name="close"></ion-icon>
       Stop scan
     </ion-button>

@@ -55,18 +55,25 @@ export class QrScanPage implements AfterViewInit {
       await this.loading.present();
     }
 
-    // Not working on iOS standalone mode!
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: 'environment' }
-    });
+    try {
+      // Not working on iOS standalone mode!
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'environment' }
+      });
 
-    this.videoElement.srcObject = stream;
-    // Required for Safari
-    this.videoElement.setAttribute('playsinline', true);
+      this.videoElement.srcObject = stream;
+      // Required for Safari
+      this.videoElement.setAttribute('playsinline', true);
 
 
-    this.videoElement.play();
-    requestAnimationFrame(this.scan.bind(this));
+      this.videoElement.play();
+      requestAnimationFrame(this.scan.bind(this));
+    } catch (error: any) {
+      this.loading.dismiss();
+      console.log(error);
+      this.showAlert('Error', 'An error occurred, please try again later!');
+    }
+
   }
 
   async scan() {
