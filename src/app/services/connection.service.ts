@@ -19,7 +19,8 @@ export class ConnectionService {
       register: 'auth/register',
       validate: 'auth/validate',
       logout: 'auth/logout',
-      updateProfile: 'auth/updateProfile'
+      updateProfile: 'auth/updateProfile',
+      dashboard: 'dashboard',
     };
   }
 

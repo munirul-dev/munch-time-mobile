@@ -28,69 +28,7 @@
                     <p style="font-size: 1.2rem; font-weight: bold;">Daily Transactions</p>
                   </ion-col>
                   <ion-col size="auto">
-                    <p style="font-size: 1.2rem; font-weight: bold;">{{ totalAmount | currency: 'RM' }}</p>
-                  </ion-col>
-                </ion-row>
-
-                <br>
-                <div class="divider"></div>
-                <br>
-
-                <ion-row>
-                  <ion-col size="6">
-                    <p>Last Transaction</p>
-                    <p style="font-size: 1.2rem;">{{ lastestTransaction.amount | currency: 'RM' }}</p>
-                  </ion-col>
-                  <ion-col size="6">
-                    <p>Date</p>
-                    <p style="font-size: 1.2rem;">{{ lastestTransaction.date }}</p>
-                  </ion-col>
-                </ion-row>
-              </ion-card-content>
-            </ion-card>
-          </div>
-
-          <!-- CANTEEN WORKER -->
-          <div *ngSwitchCase="'canteen-worker'">
-            <ion-card>
-              <ion-card-content>
-                <ion-row>
-                  <ion-col class="ion-text-left">
-                    <p style="font-size: 1.2rem; font-weight: bold;">Daily Transactions</p>
-                  </ion-col>
-                  <ion-col size="auto">
-                    <p style="font-size: 1.2rem; font-weight: bold;">{{ totalAmount | currency: 'RM' }}</p>
-                  </ion-col>
-                </ion-row>
-
-                <br>
-                <div class="divider"></div>
-                <br>
-
-                <ion-row>
-                  <ion-col size="6">
-                    <p>Last Transaction</p>
-                    <p style="font-size: 1.2rem;">{{ lastestTransaction.amount | currency: 'RM' }}</p>
-                  </ion-col>
-                  <ion-col size="6">
-                    <p>Date</p>
-                    <p style="font-size: 1.2rem;">{{ lastestTransaction.date }}</p>
-                  </ion-col>
-                </ion-row>
-              </ion-card-content>
-            </ion-card>
-          </div>
-
-          <!-- PARENT -->
-          <div *ngSwitchCase="'parent'">
-            <ion-card>
-              <ion-card-content>
-                <ion-row>
-                  <ion-col class="ion-text-left">
-                    <p style="font-size: 1.2rem; font-weight: bold;">Daily Reservations</p>
-                  </ion-col>
-                  <ion-col size="auto">
-                    <p style="font-size: 1.2rem; font-weight: bold;">{{ totalAmount | currency: 'RM' }}</p>
+                    <p style="font-size: 1.2rem; font-weight: bold;">{{ dailyAmount | currency: 'RM' }}</p>
                   </ion-col>
                 </ion-row>
 
@@ -112,15 +50,239 @@
             </ion-card>
 
             <br>
+
+            <ion-card>
+              <ion-card-header color="medium">
+                <ion-card-title>Total Users</ion-card-title>
+              </ion-card-header>
+              <ion-card-content class="ion-no-padding">
+
+                <ion-card color="primary">
+                  <ion-card-content>
+                    <ion-grid fixed>
+                      <ion-row>
+                        <ion-col style="font-size: large; font-weight: bold;" class="ion-text-start">Admin</ion-col>
+                        <ion-col style="font-size: large; font-weight: bold;" size="col">{{ count_user.admin }}</ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card-content>
+                </ion-card>
+
+                <ion-card color="warning">
+                  <ion-card-content>
+                    <ion-grid fixed>
+                      <ion-row>
+                        <ion-col style="font-size: large; font-weight: bold;" class="ion-text-start">Canteen Worker</ion-col>
+                        <ion-col style="font-size: large; font-weight: bold;" size="col">{{ count_user.canteen_worker }}</ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card-content>
+                </ion-card>
+
+                <ion-card color="danger">
+                  <ion-card-content>
+                    <ion-grid fixed>
+                      <ion-row>
+                        <ion-col style="font-size: large; font-weight: bold;" class="ion-text-start">Parent</ion-col>
+                        <ion-col style="font-size: large; font-weight: bold;" size="col">{{ count_user.parent }}</ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card-content>
+                </ion-card>
+
+                <ion-card color="success">
+                  <ion-card-content>
+                    <ion-grid fixed>
+                      <ion-row>
+                        <ion-col style="font-size: large; font-weight: bold;" class="ion-text-start">Student</ion-col>
+                        <ion-col style="font-size: large; font-weight: bold;" size="col">{{ count_user.student }}</ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card-content>
+                </ion-card>
+
+              </ion-card-content>
+            </ion-card>
+
+            <div class="divider"></div>
+
+            <ion-card>
+              <ion-card-header color="medium">
+                <ion-card-title>Total Payments</ion-card-title>
+              </ion-card-header>
+              <ion-card-content class="ion-no-padding">
+
+                <ion-card color="success">
+                  <ion-card-content>
+                    <ion-grid fixed>
+                      <ion-row>
+                        <ion-col style="font-size: large; font-weight: bold;" class="ion-text-start">Success</ion-col>
+                        <ion-col style="font-size: large; font-weight: bold;" size="col">{{ count_payment.success }}</ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card-content>
+                </ion-card>
+
+                <ion-card color="warning">
+                  <ion-card-content>
+                    <ion-grid fixed>
+                      <ion-row>
+                        <ion-col style="font-size: large; font-weight: bold;" class="ion-text-start">Pending</ion-col>
+                        <ion-col style="font-size: large; font-weight: bold;" size="col">{{ count_payment.pending }}</ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card-content>
+                </ion-card>
+
+                <ion-card color="danger">
+                  <ion-card-content>
+                    <ion-grid fixed>
+                      <ion-row>
+                        <ion-col style="font-size: large; font-weight: bold;" class="ion-text-start">Failed</ion-col>
+                        <ion-col style="font-size: large; font-weight: bold;" size="col">{{ count_payment.failed }}</ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card-content>
+                </ion-card>
+
+              </ion-card-content>
+            </ion-card>
+
+          </div>
+
+          <!-- CANTEEN WORKER -->
+          <div *ngSwitchCase="'canteen-worker'">
+            <ion-card>
+              <ion-card-content>
+                <ion-row>
+                  <ion-col class="ion-text-left">
+                    <p style="font-size: 1.2rem; font-weight: bold;">Daily Transactions</p>
+                  </ion-col>
+                  <ion-col size="auto">
+                    <p style="font-size: 1.2rem; font-weight: bold;">{{ dailyAmount | currency: 'RM' }}</p>
+                  </ion-col>
+                </ion-row>
+
+                <br>
+                <div class="divider"></div>
+                <br>
+
+                <ion-row>
+                  <ion-col size="6">
+                    <p>Last Transaction</p>
+                    <p style="font-size: 1.2rem;">{{ lastestTransaction.amount | currency: 'RM' }}</p>
+                  </ion-col>
+                  <ion-col size="6">
+                    <p>Date</p>
+                    <p style="font-size: 1.2rem;">{{ lastestTransaction.date }}</p>
+                  </ion-col>
+                </ion-row>
+              </ion-card-content>
+            </ion-card>
+
+            <br>
+
+            <ion-card color="warning">
+              <ion-card-content>
+                <ion-grid fixed>
+                  <ion-row>
+                    <ion-col class="ion-text-start">
+                      <ion-text style="font-size: larger; font-weight: bold;">Unpaid Reservation</ion-text>
+                    </ion-col>
+                    <ion-col size="auto">
+                      <ion-text style="font-size: larger; font-weight: bold;">{{ count_reservation.unpaid }}</ion-text>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+
+            <ion-card color="primary">
+              <ion-card-content>
+                <ion-grid fixed>
+                  <ion-row>
+                    <ion-col class="ion-text-start">
+                      <ion-text style="font-size: larger; font-weight: bold;">Pending Redemption</ion-text>
+                    </ion-col>
+                    <ion-col size="auto">
+                      <ion-text style="font-size: larger; font-weight: bold;">{{ count_reservation.pending }}</ion-text>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+
+            <ion-card color="danger">
+              <ion-card-content>
+                <ion-grid fixed>
+                  <ion-row>
+                    <ion-col class="ion-text-start">
+                      <ion-text style="font-size: larger; font-weight: bold;">Cancelled Reservation</ion-text>
+                    </ion-col>
+                    <ion-col size="auto">
+                      <ion-text style="font-size: larger; font-weight: bold;">{{ count_reservation.cancelled }}</ion-text>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+
+            <ion-card color="success">
+              <ion-card-content>
+                <ion-grid fixed>
+                  <ion-row>
+                    <ion-col class="ion-text-start">
+                      <ion-text style="font-size: larger; font-weight: bold;">Redeemed Reservation</ion-text>
+                    </ion-col>
+                    <ion-col size="auto">
+                      <ion-text style="font-size: larger; font-weight: bold;">{{ count_reservation.redeemed }}</ion-text>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+
+          </div>
+
+          <!-- PARENT -->
+          <div *ngSwitchCase="'parent'">
+            <ion-card>
+              <ion-card-content>
+                <ion-row>
+                  <ion-col class="ion-text-left">
+                    <p style="font-size: 1.2rem; font-weight: bold;">Daily Reservations</p>
+                  </ion-col>
+                  <ion-col size="auto">
+                    <p style="font-size: 1.2rem; font-weight: bold;">{{ dailyAmount | currency: 'RM' }}</p>
+                  </ion-col>
+                </ion-row>
+
+                <br>
+                <div class="divider"></div>
+                <br>
+
+                <ion-row>
+                  <ion-col size="6">
+                    <p>Last Transaction</p>
+                    <p style="font-size: 1.2rem;">{{ lastestTransaction.amount | currency: 'RM' }}</p>
+                  </ion-col>
+                  <ion-col size="6">
+                    <p>Date</p>
+                    <p style="font-size: 1.2rem;">{{ lastestTransaction.date }}</p>
+                  </ion-col>
+                </ion-row>
+              </ion-card-content>
+            </ion-card>
+
             <h2 class="ion-margin-start">My Family</h2>
 
             <div *ngIf="isLoading" class="ion-text-center">
               <ion-spinner name="crescent"></ion-spinner>
             </div>
 
-            <div *ngIf="!isLoading && loadedChild.length > 0">
-              <ion-card *ngFor="let item of loadedChild">
-                <ion-card-header color="danger">
+            <div *ngIf="!isLoading && students.length > 0">
+              <ion-card *ngFor="let item of students">
+                <ion-card-header color="pink">
                   <ion-row class="ion-align-items-center">
                     <ion-col size="auto">
                       <ion-avatar>
@@ -128,27 +290,31 @@
                       </ion-avatar>
                     </ion-col>
                     <ion-col>
-                      <ion-card-title class="ion-margin-start">Haikal</ion-card-title>
+                      <ion-card-title class="ion-margin-start">{{ item.name }}</ion-card-title>
                     </ion-col>
                   </ion-row>
                 </ion-card-header>
-                <ion-card-content>
+                <ion-card-content *ngIf="item.reservation_date && item.reservation_food">
                   <br>
                   <ion-row>
                     <ion-col size="6">
                       <p>Reservation Date</p>
-                      <p style="font-size: 1.2rem;">01/01/2024</p>
+                      <p style="font-size: 1.2rem;">{{ item.reservation_date }}</p>
                     </ion-col>
                     <ion-col size="6">
                       <p>Food</p>
-                      <p style="font-size: 1.2rem;">Nasi Goreng Cina</p>
+                      <p style="font-size: 1.2rem;">{{ item.reservation_food }}</p>
                     </ion-col>
                   </ion-row>
+                </ion-card-content>
+                <ion-card-content *ngIf="!item.reservation_date || !item.reservation_food">
+                  <br>
+                  <ion-text color="danger" style="font-weight: bold;">No reservation yet.</ion-text>
                 </ion-card-content>
               </ion-card>
             </div>
 
-            <ion-card *ngIf="!isLoading && loadedChild.length === 0" color="danger">
+            <ion-card *ngIf="!isLoading && students.length === 0" color="danger">
               <ion-card-content>You have no childs yet.</ion-card-content>
             </ion-card>
           </div>

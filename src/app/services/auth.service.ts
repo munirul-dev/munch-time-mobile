@@ -193,6 +193,17 @@ export class AuthService {
     );
   }
 
+  dashboard() {
+    return this.auth.pipe(
+      filter((auth: User | null): auth is User => auth !== null),
+      switchMap((auth: User) => {
+        this._token = auth.token;
+        return this.http.post(this.connections.api + this.connections.auth.dashboard, null, this.connections.options(this._token));
+      }),
+      take(1),
+    );
+  }
+
   autoLogout() {
     this.storage.remove('user');
     this._user.next(null);

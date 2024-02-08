@@ -8,5 +8,7 @@ export class Student {
     public allergies: string,
     public year_level: string,
     public class_name: string,
+    public reservation_date?: string,
+    public reservation_food?: string,
   ) { }
 }
