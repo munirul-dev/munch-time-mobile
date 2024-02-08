@@ -35,6 +35,7 @@
     "@ionic/storage": "^4.0.0",
     "@ionic/storage-angular": "^4.0.0",
     "ionicons": "^7.0.0",
+    "jsqr": "^1.4.0",
     "ng-lazyload-image": "^9.1.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

@@ -56,6 +56,7 @@ export class AppComponent implements OnInit {
 
           case 'canteen-worker':
             this.appPages = [
+              { title: 'QR Code Scanner', url: '/pages/qr', icon: 'qr-code' },
               { title: 'Menus Management', url: '/pages/menus', icon: 'fast-food' },
               { title: 'Transactions', url: '/pages/transactions', icon: 'cash' },
             ];
