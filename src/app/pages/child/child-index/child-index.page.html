@@ -48,9 +48,15 @@
         </ion-grid>
       </ion-card-header>
       <ion-card-content class="ion-text-start" style="padding: 16px;">
-        <ion-text>Parent: {{ item.parent_name }}</ion-text>
+        <ion-text><b>Parent/Guardian:</b> {{ item.parent_name }}</ion-text>
         <br>
-        <ion-text>Class: {{ item.class_name ? item.class_name : 'N/A' }}</ion-text>
+        <ion-text><b>Age:</b> {{ item.age }}</ion-text>
+        <br>
+        <ion-text><b>Class:</b> {{ item.class_name ? item.class_name : 'N/A' }}</ion-text>
+        <br>
+        <ion-text><b>Year Level:</b> {{ item.year_level ? item.year_level : 'N/A' }}</ion-text>
+        <br>
+        <ion-text><b>Allergies:</b> {{ item.allergies ? item.allergies : 'N/A' }}</ion-text>
       </ion-card-content>
     </ion-card>
   </ion-list>

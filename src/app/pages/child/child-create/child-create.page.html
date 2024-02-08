@@ -40,15 +40,23 @@
       <ion-card-content class="ion-text-start" style="padding: 16px;">
 
         <ion-item class="item-single ion-margin-bottom" color="medium">
-          <ion-input type="text" placeholder="Enter name here" name="name" [(ngModel)]="name" required></ion-input>
+          <ion-input type="text" label="Name" placeholder="Enter name here" name="name" [(ngModel)]="name" required></ion-input>
         </ion-item>
 
         <ion-item class="item-single ion-margin-bottom" color="medium">
-          <ion-input type="text" placeholder="Class name" name="class_name" [(ngModel)]="class_name" required></ion-input>
+          <ion-input type="number" label="Age" placeholder="0" name="age" min="1" max="18" [(ngModel)]="age" required></ion-input>
         </ion-item>
 
         <ion-item class="item-single ion-margin-bottom" color="medium">
-          <ion-input type="text" placeholder="Year level" name="year_level" [(ngModel)]="year_level" required></ion-input>
+          <ion-input type="text" label="Class Name" placeholder="Eg: 1 Bestari" name="class_name" [(ngModel)]="class_name" required></ion-input>
+        </ion-item>
+
+        <ion-item class="item-single ion-margin-bottom" color="medium">
+          <ion-input type="text" label="Year Level" placeholder="Eg: Year 1" name="year_level" [(ngModel)]="year_level" required></ion-input>
+        </ion-item>
+
+        <ion-item class="item-single ion-margin-bottom" color="medium">
+          <ion-input type="text" label="Allergies" placeholder="Eg: No peanut" name="allergies" [(ngModel)]="allergies" required></ion-input>
         </ion-item>
 
       </ion-card-content>

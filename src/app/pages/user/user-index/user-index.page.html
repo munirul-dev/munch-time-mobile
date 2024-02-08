@@ -44,6 +44,8 @@
         </ion-grid>
       </ion-card-header>
       <ion-card-content class="ion-text-start" style="padding: 16px;">
+        <ion-text>Phone: {{ item.tel ? item.tel : 'N/A' }}</ion-text>
+        <br>
         <ion-text>Email: {{ item.email }}</ion-text>
         <br>
         <ion-text>Role: {{ item.roles }}</ion-text>

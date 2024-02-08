@@ -4,6 +4,8 @@ export class Student {
     public user_id: number,
     public parent_name: string,
     public name: string,
+    public age: number,
+    public allergies: string,
     public year_level: string,
     public class_name: string,
   ) { }

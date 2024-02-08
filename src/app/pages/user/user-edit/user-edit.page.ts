@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserEditPage {
   name: string = '';
+  tel: string = '';
   email: string = '';
   password: string = '';
   role: string = '';
@@ -29,6 +30,7 @@ export class UserEditPage {
       }).subscribe({
         next: (response: any) => {
           this.name = response.data.name;
+          this.tel = response.data.tel;
           this.email = response.data.email;
           this.role = response.data.role;
           this.status = response.data.status;
@@ -57,6 +59,7 @@ export class UserEditPage {
               this.userService.update({
                 id: this.activatedRoute.snapshot.paramMap.get('id'),
                 name: this.name,
+                tel: this.tel,
                 password: this.password,
                 role: this.role,
                 status: this.status,

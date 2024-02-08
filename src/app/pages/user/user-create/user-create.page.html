@@ -40,15 +40,19 @@
       <ion-card-content class="ion-text-start" style="padding: 16px;">
 
         <ion-item class="item-single ion-margin-bottom" color="medium">
-          <ion-input type="text" placeholder="Enter name here" name="name" [(ngModel)]="name" required></ion-input>
+          <ion-input type="text" label="Name" placeholder="Enter name here" name="name" [(ngModel)]="name" required></ion-input>
         </ion-item>
 
         <ion-item class="item-single ion-margin-bottom" color="medium">
-          <ion-input type="email" placeholder="example@gmail.com" name="email" [(ngModel)]="email" required></ion-input>
+          <ion-input type="text" label="Tel" placeholder="01XXXXXXX" name="tel" [(ngModel)]="tel" required minlength="7" maxlength="11" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"></ion-input>
         </ion-item>
 
         <ion-item class="item-single ion-margin-bottom" color="medium">
-          <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="password" required></ion-input>
+          <ion-input type="email" label="Email" placeholder="example@gmail.com" name="email" [(ngModel)]="email" required></ion-input>
+        </ion-item>
+
+        <ion-item class="item-single ion-margin-bottom" color="medium">
+          <ion-input type="password" label="Password" placeholder="* * * * *" name="password" [(ngModel)]="password" required autocomplete="off"></ion-input>
         </ion-item>
 
         <ion-item class="item-single ion-margin-bottom" color="medium">

@@ -10,8 +10,10 @@ import { StudentService } from 'src/app/services/student.service';
 })
 export class ChildCreatePage {
   name: string = '';
+  age: number | null = null;
   year_level: string = '';
   class_name: string = '';
+  allergies: string = '';
 
   constructor(
     private alertController: AlertController,
@@ -37,8 +39,10 @@ export class ChildCreatePage {
             handler: () => {
               this.studentService.create({
                 name: this.name,
+                age: this.age,
                 year_level: this.year_level,
                 class_name: this.class_name,
+                allergies: this.allergies,
               }).subscribe({
                 next: (response: any) => {
                   this.showToast('Child created successfully!', 2000, 'checkmark');

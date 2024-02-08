@@ -56,6 +56,7 @@ export class AuthService {
         } else if (error.status === 503) {
           return 'maintenance';
         } else {
+          this.autoLogout();
           return 'false';
         }
       }),

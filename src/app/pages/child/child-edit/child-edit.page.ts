@@ -11,8 +11,10 @@ import { StudentService } from 'src/app/services/student.service';
 })
 export class ChildEditPage {
   name: string = '';
+  age: number = 0;
   year_level: string = '';
   class_name: string = '';
+  allergies: string = '';
 
   constructor(
     private alertController: AlertController,
@@ -54,8 +56,10 @@ export class ChildEditPage {
               this.studentService.update({
                 id: this.activatedRoute.snapshot.paramMap.get('id'),
                 name: this.name,
+                age: this.age,
                 year_level: this.year_level,
                 class_name: this.class_name,
+                allergies: this.allergies,
               }).subscribe({
                 next: (response: any) => {
                   this.showToast('Child updated successfully!', 2000, 'checkmark');

@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserCreatePage {
   name: string = '';
+  tel: string = '';
   email: string = '';
   password: string = '';
   role: string = '';
@@ -39,6 +40,7 @@ export class UserCreatePage {
             handler: () => {
               this.userService.create({
                 name: this.name,
+                tel: this.tel,
                 email: this.email,
                 password: this.password,
                 role: this.role,
