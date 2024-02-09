@@ -19,6 +19,63 @@
     </ion-toolbar>
   </ion-header>
 
+  <div *ngIf="isLoading">
+    <ion-card *ngFor="let item of [1, 2, 3]">
+      <ion-item-divider color="dark">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col class="ion-text-start">Reservation Date</ion-col>
+            <ion-col size="auto">Loading...</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item-divider>
+      <ion-card-header color="pink">
+        <ion-grid fixed>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="auto">
+              <ion-avatar class="ion-margin-end">
+                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+            </ion-col>
+            <ion-col>
+              <ion-text style="font-size: larger; font-weight: bold;">
+                <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+              </ion-text>
+            </ion-col>
+            <ion-col size="auto">
+              <ion-badge color="primary">Loading...</ion-badge>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid fixed>
+          <ion-row class="ion-margin-top ion-margin-bottom ion-align-items-center">
+            <ion-col class="ion-text-start">Order Summary</ion-col>
+            <ion-col size="auto">
+            </ion-col>
+          </ion-row>
+          <div class="divider"></div>
+          <ion-row class="ion-margin-top">
+            <ion-col size="10" class="ion-text-start">
+              <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="2" class="ion-text-end" style="font-weight: bold;">
+              <ion-skeleton-text class="ion-text-end" animated style="width: 100%"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-margin-top">
+            <ion-col size="10" class="ion-text-start">Quantity</ion-col>
+            <ion-col size="2" class="ion-text-end" style="font-weight: bold;">
+              <ion-skeleton-text class="ion-text-end" animated style="width: 100%"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+
   <ion-card *ngIf="!isLoading && loadedReservation.length === 0" color="danger">
     <ion-card-content>You have no reservations yet.</ion-card-content>
   </ion-card>
@@ -91,6 +148,7 @@
         </ion-grid>
       </ion-card-content>
     </ion-card>
+
   </div>
 
 </ion-content>
