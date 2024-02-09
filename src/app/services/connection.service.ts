@@ -76,7 +76,8 @@ export class ConnectionService {
 
   get settlement() {
     return {
-      index: 'settlement/index',
+      transactions: 'settlement/transactions',
+      checkWithdrawal: 'settlement/checkWithdrawal',
       makeWithdrawal: 'settlement/makeWithdrawal',
       processWithdrawal: 'settlement/processWithdrawal'
     };

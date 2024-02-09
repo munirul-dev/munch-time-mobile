@@ -97,12 +97,12 @@ const routes: Routes = [
             loadChildren: () => import('./transaction/transaction-withdraw/transaction-withdraw.module').then( m => m.TransactionWithdrawPageModule)
           },
           {
-            path: 'process',
+            path: 'process/:id',
             loadChildren: () => import('./transaction/transaction-process/transaction-process.module').then( m => m.TransactionProcessPageModule)
           },
           {
-            path: 'confirm',
-            loadChildren: () => import('./transaction/transaction-confirm/transaction-confirm.module').then( m => m.TransactionConfirmPageModule)
+            path: ':id',
+            loadChildren: () => import('./transaction/transaction-view/transaction-view.module').then(m => m.TransactionViewPageModule)
           },
         ]
       },
