@@ -27,7 +27,7 @@
         <ion-card-content>You have no withdrawal requests yet.</ion-card-content>
       </ion-card>
 
-      <ion-item *ngFor="let item of loadedSettlement" [routerLink]="'process/' + item.id.toString()">
+      <ion-item *ngFor="let item of loadedSettlement" (click)="openSettlement(item)">
         <ion-grid fixed>
           <ion-row class="ion-align-items-center" style="margin: 8px 0;">
             <ion-col size="auto">
@@ -43,7 +43,7 @@
               <ion-text color="medium" style="font-size: small;">{{ item.created_at }}</ion-text>
             </ion-col>
             <ion-col size="auto">
-              <ion-badge [color]="item.status === 0 ? 'medium' : 'success'">{{ item.status === 0 ? 'Pending' : 'Approved' }}</ion-badge>
+              <ion-badge [color]="item.status === 0 ? 'warning' : 'success'">{{ item.status === 0 ? 'Pending' : 'Approved' }}</ion-badge>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -85,7 +85,7 @@
                   <ion-text style="font-size: small;">{{ item.created_at }}</ion-text>
                 </ion-col>
                 <ion-col size="auto">
-                  <ion-badge [color]="item.status === 0 ? 'medium' : 'success'">{{ item.status === 0 ? 'Pending' : 'Successful' }}</ion-badge>
+                  <ion-badge [color]="item.status === 0 ? 'warning' : 'success'">{{ item.status === 0 ? 'Pending' : 'Successful' }}</ion-badge>
                 </ion-col>
               </ion-row>
             </ion-grid>

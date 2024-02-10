@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Reservation } from 'src/app/model/reservation.model';
 import { Settlement } from 'src/app/model/settlement.model';
@@ -28,6 +28,7 @@ export class TransactionIndexPage implements OnInit, OnDestroy {
     private settlementService: SettlementService,
     private toastController: ToastController,
     private alertController: AlertController,
+    private navController: NavController,
   ) { }
 
   ngOnInit() {
@@ -57,6 +58,14 @@ export class TransactionIndexPage implements OnInit, OnDestroy {
     });
   }
 
+  openSettlement(settlement: Settlement) {
+    this.navController.navigateForward('/pages/transactions/process/' + settlement.id, {
+      state: {
+        settlement: settlement
+      }
+    });
+  }
+
   ngOnDestroy() {
     if (this.transactionSub) {
       this.transactionSub.unsubscribe();
@@ -65,7 +74,6 @@ export class TransactionIndexPage implements OnInit, OnDestroy {
       this.settlementSub.unsubscribe();
     }
   }
-
 
   private showToast(text: string, time: number, buttonIcon: string) {
     this.toastController.create({

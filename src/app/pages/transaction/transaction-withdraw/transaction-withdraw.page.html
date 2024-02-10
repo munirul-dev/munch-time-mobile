@@ -1,13 +1,46 @@
 <ion-header [translucent]="false">
   <ion-toolbar>
-    <ion-title>transaction-withdraw</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="pages/transactions"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Withdrawal</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="true">
+        <ion-icon slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">transaction-withdraw</ion-title>
+      <ion-title size="large">Withdrawal</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-card *ngIf="!isLoading && totalTransaction === 0" color="danger">
+    <ion-card-content>
+      You have no transactions left to withdraw.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="!isLoading && totalTransaction > 0">
+    <ion-card-header color="primary" class="ion-text-center">
+      <ion-card-subtitle>Available Amount Allowed To Withdraw</ion-card-subtitle>
+      <ion-card-title>Total Withdrawal Amount</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <br>
+      <ion-text color="success" style="font-size: xx-large; font-weight: 900;">{{ totalClaimAmount | currency: "RM" }}</ion-text>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
+
+<ion-footer *ngIf="!isLoading && totalTransaction > 0">
+  <ion-toolbar>
+    <ion-button expand="block" color="success" (click)="confirm()">Confirm</ion-button>
+  </ion-toolbar>
+</ion-footer>

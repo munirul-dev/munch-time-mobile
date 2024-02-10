@@ -6,6 +6,7 @@ export class Settlement {
     public amount: number,
     public status: number,
     public created_at: string,
+    public created_at_date: string,
     public updated_at: string
     ) { }
 }

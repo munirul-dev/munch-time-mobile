@@ -48,9 +48,9 @@ export class SettlementService {
     );
   }
 
-  makeWithdrawal(body: any) {
+  makeWithdrawal() {
     return this.authService.auth.pipe(
-      switchMap((auth: User | null) => this.http.post(this.connections.api + this.connections.settlement.makeWithdrawal, body, this.connections.options(auth ? auth.token : ''))),
+      switchMap((auth: User | null) => this.http.post(this.connections.api + this.connections.settlement.makeWithdrawal, null, this.connections.options(auth ? auth.token : ''))),
       take(1),
       map((result: any) => result.data),
     );

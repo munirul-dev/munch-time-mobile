@@ -1,13 +1,72 @@
 <ion-header [translucent]="false">
   <ion-toolbar>
-    <ion-title>transaction-process</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="pages/transactions"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Settlements</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="true">
+        <ion-icon slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">transaction-process</ion-title>
+      <ion-title size="large">Settlements</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-card *ngIf="settlement">
+    <ion-card-header color="primary" class="ion-text-center">
+      <ion-card-subtitle>Withdrawal Amount Requested By User</ion-card-subtitle>
+      <ion-card-title>Settlement Amount</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <br>
+      <ion-text color="success" style="font-size: xx-large; font-weight: 900;">{{ settlement.amount| currency: "RM" }}</ion-text>
+      <br>
+      <ion-badge class="ion-margin-top" [color]="settlement.status === 0 ? 'warning' : 'success'">{{ settlement.status === 0 ? 'Pending' : 'Arroved' }}</ion-badge>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-grid fixed>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="auto">
+            <ion-avatar class="ion-margin-end">
+              <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </ion-avatar>
+          </ion-col>
+          <ion-col class="ion-text-start">
+            <ion-text color="medium">
+              <p>Requested By</p>
+            </ion-text>
+            <ion-text>
+              <h3 style="font-weight: bold;">{{ settlement.user_name }}</h3>
+            </ion-text>
+          </ion-col>
+          <ion-col size="auto" class="ion-text-end">
+            <ion-text color="medium">
+              <p>Request Date</p>
+            </ion-text>
+            <ion-text>
+              <h3 style="font-weight: bold;">{{ settlement.created_at_date }}</h3>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
+
+<ion-footer *ngIf="settlement && settlement.status === 0">
+  <ion-toolbar>
+    <ion-button expand="block" color="success" (click)="process()">Approve</ion-button>
+  </ion-toolbar>
+</ion-footer>
